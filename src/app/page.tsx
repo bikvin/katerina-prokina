@@ -8,6 +8,7 @@ import { db } from "@/db";
 import { settingsFields } from "@/components/admin/settings/settingsFields";
 import Parallax from "@/components/mainPage/Parallax/Parallax";
 import WhenNeededServer from "@/components/mainPage/WhenNeeded/WhenNeededServer";
+import Results from "@/components/mainPage/Results/Results";
 
 export default async function Home() {
   let settings;
@@ -64,8 +65,9 @@ export default async function Home() {
 
       {/* <LongImageBar imageLink={"/img/bar/red8.jpg"} /> */}
       {/* <Prices sessionLength={settings.sessionLength} price={settings.price} /> */}
-
+      <Parallax imageLink="/img/bar/20.jpg" />
       {/* <LongImageBar imageLink={"/img/bar/red1.jpg"} /> */}
+      <Results />
       <Parallax imageLink="/img/bar/room4.jpg" />
       <Contacts telegram={settings.telegram} phone={settings.phone} />
 
