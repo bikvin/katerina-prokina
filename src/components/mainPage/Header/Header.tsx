@@ -44,6 +44,7 @@ export default function Header({ menuHeader }: { menuHeader: string }) {
   const menuItems = [
     { href: "#about", label: "Обо мне" },
     { href: "#when-needed", label: "Когда необходимо" },
+    { href: "#results", label: "Результаты" },
     { href: "#contacts", label: "Контакты" },
   ];
 

@@ -27,7 +27,7 @@ export default function Results() {
   return (
     <div className="">
       <section
-        id="when-needed"
+        id="results"
         className="py-16 md:py-20 px-8 md:px-10  overflow-x-hidden max-w-screen-lg mx-auto flex flex-col"
       >
         <h2 className="font-bold text-slate-800 text-4xl mb-8">
