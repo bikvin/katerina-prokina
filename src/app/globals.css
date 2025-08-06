@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import "./custom.css"; */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .accordion-content-lists > ul {
+    @apply list-none pl-4;
+  }
+
+  .when-list > ul > li::before {
+    content: "";
+    display: inline-block;
+    background-image: url("/img/icons/square2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: 0.5em;
+    vertical-align: middle;
+  }
+
+  /* .when-list > ul {
+    padding-left: 20px;
+    list-style: square;
+  } */
+
+  .accordion-content-lists a {
+    @apply text-sky-600 underline;
+  }
+
+  .accordion-content-lists p,
+  .accordion-content-lists > ul > li {
+    @apply mb-2;
+  }
+  .admin-form-header {
+    @apply text-3xl font-bold mb-8;
+  }
+  .card {
+    @apply border rounded-2xl shadow-xl p-4 md:p-20;
+  }
+
+  .admin-form {
+    @apply md:text-xl;
+  }
+
+  .admin-form label {
+    @apply block mb-1;
+  }
+
+  .admin-form input {
+    @apply border border-slate-300 focus:border-slate-600 focus:outline-none rounded-md block w-full py-1 px-2 mb-4;
+  }
+
+  .admin-horizontal-line {
+    @apply border border-slate-300 my-10;
+  }
+
+  .error {
+    @apply text-red-800;
+  }
+
+  .link-button {
+    @apply border-0 rounded-md  text-white cursor-pointer text-center block  p-[5px] w-[150px];
+  }
+
+  .link-button-green {
+    @apply bg-emerald-500 hover:bg-emerald-600;
+  }
+
+  .link-button-blue {
+    @apply bg-sky-600 hover:bg-sky-700;
+  }
+
+  .link-button-red {
+    @apply bg-rose-600 hover:bg-rose-700;
+  }
+
+  .link-button-gray {
+    @apply bg-slate-400 hover:bg-slate-500;
+  }
+  .gray-subheader {
+    @apply text-2xl text-slate-500;
+  }
+
+  .green-square {
+  }
+
+  .green-square ul {
+    @apply list-none pl-0 ml-0;
+  }
+
+  .green-square ul li {
+    @apply mt-4 ml-[50px] relative;
+  }
+
+  .green-square > ul > li::before {
+    content: "";
+    display: inline-block;
+    background-image: url("/img/icons/check-gray.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    vertical-align: middle;
+    position: absolute;
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .green-square p:has(sup) {
+    @apply ml-[50px];
+  }
+
+  .green-square p {
+    @apply mb-4;
+  }
+
+  .green-square .ql-align-center {
+    @apply text-center;
+  }
+
+  .green-square h1 {
+    @apply font-bold text-2xl mt-4;
+  }
+
+  .green-square h2 {
+    @apply font-bold text-xl mt-4;
+  }
+}

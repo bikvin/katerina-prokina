@@ -1,0 +1,45 @@
+.RTEditor {
+  width: 100%;
+}
+
+.RTEditor > div:first-child {
+  color: darkorange;
+  border-radius: 5px 5px 0 0;
+}
+
+.RTEditor > div:last-child {
+  border-radius: 0 0 5px 5px;
+  height: 500px;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.RTEditor > div:last-child > div {
+  scrollbar-color: #ccc rgba(0, 0, 0, 0);
+  scrollbar-width: thin;
+}
+
+.RTEditor > div:last-child p,
+.RTEditor > div:last-child li {
+  font-size: 20px;
+  line-height: 170%;
+  margin-bottom: 20px;
+}
+
+.RTEditor > div:last-child h1 {
+  text-align: left;
+  font-size: 34px;
+}
+
+.RTEditor > div:last-child h2 {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+.RTEditor > div:last-child h3 {
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
