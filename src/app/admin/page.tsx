@@ -1,31 +1,22 @@
-import SettingsForm from "@/components/admin/settings/SettingsForm";
+import ContactsList from "@/components/admin/contacts/ContactsList";
 import Header from "@/components/admin/topMenu/topMenu";
 import { db } from "@/db";
-import {
-  settingsFields,
-  settingsType,
-} from "@/components/admin/settings/settingsFields";
-
+import type { Contact } from "@prisma/client";
 export default async function AdminPage() {
-  const settings = Object.fromEntries(
-    settingsFields.map((item) => [item, ""])
-  ) as settingsType;
+  const contacts: Contact[] = [];
 
   try {
-    const data = await db.settings.findMany();
+    const data = await db.contact.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 500,
+    });
 
     if (!data) {
       return <div className="text-red-800">Данные не найдены.</div>;
     }
 
-    data.forEach((el) => {
-      if (
-        typeof el.field === "string" &&
-        settingsFields.includes(el.field as keyof settingsType)
-      ) {
-        const key = el.field as keyof settingsType;
-        settings[key] = el.value || "";
-      }
+    data.forEach((item) => {
+      contacts.push(item);
     });
   } catch (err) {
     console.log(err);
@@ -38,8 +29,9 @@ export default async function AdminPage() {
 
       <div className="max-w-screen-lg mx-auto ">
         <div className="w-[90%] md:w-2/3 mx-auto">
-          <h1 className="admin-form-header mt-10">Основные настройки</h1>
-          <SettingsForm {...settings} />
+          <h1 className="admin-form-header mt-10">Запросы от клиентов</h1>
+
+          <ContactsList contacts={contacts} />
         </div>
       </div>
     </>

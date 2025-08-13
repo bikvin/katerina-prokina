@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import ContactForm from "../ContactForm/ContactForm";
 
 export default function Contacts({
   telegram,
@@ -15,7 +16,7 @@ export default function Contacts({
       id="contacts"
       className="py-16 md:py-20 px-8 md:px-10  overflow-x-hidden max-w-screen-lg mx-auto flex flex-col"
     >
-      <h2 className="font-bold text-slate-800 text-4xl mb-8">Контакты:</h2>
+      <h2 className="font-bold text-slate-800 text-4xl mb-8">Напишите мне:</h2>
 
       <motion.div
         initial={{ opacity: 0, x: -100 }}
@@ -23,7 +24,9 @@ export default function Contacts({
         transition={{ duration: 1, ease: "backInOut" }}
         viewport={{ once: true, amount: 0.4 }}
       >
-        <div className="mt-4 mb-4">
+        <ContactForm />
+
+        <div className="mt-20 mb-4">
           <a
             href={`https://t.me/${telegram.replace(/[^\w]/g, "")}`}
             className="flex text-lg items-center justify-start gap-2 hover:scale-110 origin-[0%_50%]"

@@ -13,11 +13,11 @@ export type settingsType = {
   subHeader2: string;
   rutubeLink: string;
   youtubeLink: string;
-  sessionLength: string;
-  price: string;
   telegram: string;
   phone: string;
   footerText: string;
+  notificationEmails: string;
+  allowedTelegramAccounts: string;
 };
 
 export const settingsFieldsWithDividers = [
@@ -42,15 +42,22 @@ export const settingsFieldsWithDividers = [
   },
 
   { divider: true },
-  { name: "sessionLength", label: "Длительность сессии" },
-  { name: "price", label: "Цена" },
-
-  { divider: true },
   { name: "telegram", label: "Telegram" },
   { name: "phone", label: "Телефон" },
 
   { divider: true },
   { name: "footerText", label: "Текст футера" },
+  { divider: true },
+  {
+    name: "notificationEmails",
+    label:
+      "Адреса email для уведомления о заявках. Через зяпятую (one@mail.com, two@mail.com, three@mail.com) ",
+  },
+  {
+    name: "allowedTelegramAccounts",
+    label:
+      "Аккаунты telegram, которые могут получать уведомления. Через зяпятую. После добавления сюда нужно с этого аккаунта зайти в бот katerina_prokina_bot и нажать start",
+  },
 ];
 
 export const settingsFields: (keyof settingsType)[] = settingsFieldsWithDividers

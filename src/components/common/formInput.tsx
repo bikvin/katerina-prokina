@@ -5,17 +5,24 @@ export default function FormInput({
   name,
   defaultValue,
   formState,
+  placeHolder,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   name: string;
   defaultValue?: string;
   formState: any;
+  placeHolder?: string;
 }) {
   return (
     <div>
       <label htmlFor={name}>{children}</label>
 
-      <input name={name} type="text" defaultValue={defaultValue}></input>
+      <input
+        name={name}
+        type="text"
+        defaultValue={defaultValue}
+        placeholder={placeHolder}
+      ></input>
       {formState.errors && (
         <div className="error">{formState.errors[name]?.join(", ")}</div>
       )}

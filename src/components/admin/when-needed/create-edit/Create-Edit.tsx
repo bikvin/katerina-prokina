@@ -67,7 +67,7 @@ export default function CreateEditWhenNeededForm({
       )}
 
       <div className="flex justify-center mt-4">
-        <FormButton small={true}>
+        <FormButton size="small">
           {isEdit ? "Сохранить" : "Создать"} пункт
         </FormButton>
       </div>

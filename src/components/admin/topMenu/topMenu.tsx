@@ -42,7 +42,16 @@ export default function Header({ page }: { page?: string }) {
   };
 
   const topMenuList = [
-    { name: "Основные Настройки", link: "/admin", menuItemTargetPage: "main" },
+    {
+      name: "Главная",
+      link: "/admin",
+      menuItemTargetPage: "main",
+    },
+    {
+      name: "Основные Настройки",
+      link: "/admin/settings",
+      menuItemTargetPage: "settings",
+    },
     {
       name: "Когда нужна терапия",
       link: "/admin/when-needed",

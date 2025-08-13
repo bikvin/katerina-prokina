@@ -30,7 +30,7 @@ export default function HeroSection({
           <h2 className="font-bold text-slate-800 text-2xl mb-4">{header}</h2>
           <p className="font-light text-lg">{subHeader}</p>
           <div className="mt-10">
-            <DarkRedButton href="#">Напишите мне</DarkRedButton>
+            <DarkRedButton href="#contacts">Напишите мне</DarkRedButton>
           </div>
         </div>
       </motion.div>

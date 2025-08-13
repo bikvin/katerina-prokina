@@ -14,7 +14,7 @@ export default function Video({
   rutubeLink: string;
   youtubeLink: string;
 }) {
-  console.log("rutubeLink", rutubeLink);
+  // console.log("rutubeLink", rutubeLink);
 
   return (
     <section

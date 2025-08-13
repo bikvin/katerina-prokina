@@ -7,6 +7,7 @@ import {
   settingsType,
 } from "@/components/admin/settings/settingsFields";
 import { revalidatePath } from "next/cache";
+import { cleanTelegramChats } from "@/lib/telegram/cleanTelegramChats";
 
 type SettingsErrorFields = Partial<
   Record<keyof settingsType | "_form", string[]>
@@ -48,6 +49,8 @@ export async function editSettings(
         })
       )
     );
+
+    cleanTelegramChats(result.data.allowedTelegramAccounts); // this is no remove telegram chats that are not allowed anymore from the table
   } catch (err: unknown) {
     if (err instanceof Error) {
       return {

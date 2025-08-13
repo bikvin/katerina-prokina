@@ -9,7 +9,7 @@ export default function DeleteWhenNeededForm(props: { id: string }) {
   });
   return (
     <form action={action}>
-      <FormButton color={"red"} small={true}>
+      <FormButton color={"red"} size="small">
         Удалить
       </FormButton>
       <input type="hidden" name="id" value={props.id} />

@@ -7,13 +7,18 @@ interface FormButtonProps {
   color?: string;
   successMessage?: string | null;
   small?: boolean;
+  size?: string;
+  type?: string;
+  className?: string;
 }
 
 export default function FormButton({
   children,
   color = "blue",
   successMessage,
-  small = false,
+  size = "large",
+  type = "admin",
+  className = "",
 }: FormButtonProps) {
   const { pending } = useFormStatus();
   if (pending) {
@@ -36,16 +41,51 @@ export default function FormButton({
       colorClass = "bg-red-500 hover:bg-red-600";
       break;
     }
+
+    case "redGradient": {
+      colorClass =
+        "bg-gradient-to-r from-darkRed1 to-darkRed2 hover:bg-gradient-to-l";
+      break;
+    }
   }
 
-  const sizeClass = small
-    ? "p-[5px] w-[150px] text-base"
-    : "w-full p-[10px] md:p-[30px]";
+  let typeClass;
+  switch (type) {
+    case "admin": {
+      typeClass = "border-0 rounded-md text-white";
+      break;
+    }
+    case "user": {
+      typeClass = "border-0 text-white";
+      break;
+    }
+  }
+
+  // const sizeClass = small
+  //   ? "p-[5px] w-[150px] text-base"
+  //   : "w-full p-[10px] md:p-[30px]";
+
+  let sizeClass;
+  switch (size) {
+    case "large": {
+      sizeClass = "w-full p-[10px] md:p-[30px]";
+      break;
+    }
+    case "small": {
+      sizeClass = "p-[5px] w-[150px] text-base";
+      break;
+    }
+
+    case "user": {
+      sizeClass = "p-[5px] w-full";
+      break;
+    }
+  }
 
   return (
     <div className="">
       <button
-        className={`border-0 rounded-md  text-white cursor-pointer text-center block  ${colorClass} ${disabledClass} ${sizeClass}`}
+        className={`cursor-pointer text-center block ${typeClass} ${colorClass} ${disabledClass} ${sizeClass} ${className}`}
         type="submit"
         disabled={pending}
       >

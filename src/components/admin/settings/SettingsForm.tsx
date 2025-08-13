@@ -3,18 +3,14 @@ import { useFormState } from "react-dom";
 import FormButton from "@/components/common/formButton";
 import { editSettings } from "@/actions/settings/edit/editSettings";
 import FormInput from "@/components/common/formInput";
-import {
-  settingsFieldsWithDividers,
-  settingsFields,
-  settingsType,
-} from "./settingsFields";
+import { settingsFieldsWithDividers, settingsType } from "./settingsFields";
 
 export default function SettingsForm(props: settingsType) {
   const [formState, action] = useFormState(editSettings, {
     errors: {},
   });
 
-  console.log("settingsFields", settingsFields);
+  // console.log("settingsFields", settingsFields);
 
   let successMessage = null;
   if (formState.success) {

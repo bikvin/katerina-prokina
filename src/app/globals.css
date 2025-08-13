@@ -124,6 +124,20 @@
     @apply text-red-800;
   }
 
+  .user-form {
+    @apply md:text-xl font-light;
+  }
+
+  .user-form input,
+  .user-form textarea {
+    @apply border border-slate-300 focus:border-slate-600 focus:outline-none block w-full py-2 px-4 mt-4;
+  }
+
+  .user-form input::placeholder,
+  .user-form textarea::placeholder {
+    @apply text-slate-700;
+  }
+
   .link-button {
     @apply border-0 rounded-md  text-white cursor-pointer text-center block  p-[5px] w-[150px];
   }
