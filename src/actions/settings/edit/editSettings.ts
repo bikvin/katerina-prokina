@@ -41,10 +41,10 @@ export async function editSettings(
       settingsFields.map((field) =>
         db.settings.upsert({
           where: { field },
-          update: { value: result.data[field as keyof typeof result.data] },
+          update: { value: result.data[field] },
           create: {
             field,
-            value: result.data[field as keyof typeof result.data],
+            value: result.data[field],
           },
         })
       )

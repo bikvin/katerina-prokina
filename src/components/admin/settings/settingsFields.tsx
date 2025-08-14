@@ -21,53 +21,77 @@ export type settingsType = {
 };
 
 export const settingsFieldsWithDividers = [
-  { name: "pageHeader", label: "Заголовок страницы" },
-  { name: "metaDescription", label: "Meta описание" },
+  { name: "pageHeader", label: "Заголовок страницы", validation: "required" },
+  { name: "metaDescription", label: "Meta описание", validation: "required" },
   { divider: true },
-  { name: "menuHeader", label: "Заголовок меню" },
+  { name: "menuHeader", label: "Заголовок меню", validation: "required" },
   { divider: true },
-  { name: "header1", label: "Заголовок 1" },
-  { name: "subHeader1", label: "Подзаголовок 1" },
+  { name: "header1", label: "Заголовок 1", validation: "required" },
+  { name: "subHeader1", label: "Подзаголовок 1", validation: "required" },
   { divider: true },
-  { name: "header2", label: "Заголовок 2" },
-  { name: "subHeader2", label: "Подзаголовок 2" },
+  { name: "header2", label: "Заголовок 2", validation: "required" },
+  { name: "subHeader2", label: "Подзаголовок 2", validation: "required" },
   {
     name: "rutubeLink",
     label: "Ссылка видео с Rutube (например https://rutube.ru/play/embed/.../)",
+    validation: "required",
   },
   {
     name: "youtubeLink",
     label:
       "Ссылка видео с Youtube (например https://youtu.be/1umP_iO_obw?si=...)",
+    validation: "required",
   },
 
   { divider: true },
-  { name: "telegram", label: "Telegram" },
-  { name: "phone", label: "Телефон" },
+  { name: "telegram", label: "Telegram", validation: "required" },
+  { name: "phone", label: "Телефон", validation: "required" },
 
   { divider: true },
-  { name: "footerText", label: "Текст футера" },
+  { name: "footerText", label: "Текст футера", validation: "required" },
   { divider: true },
   {
     name: "notificationEmails",
     label:
       "Адреса email для уведомления о заявках. Через зяпятую (one@mail.com, two@mail.com, three@mail.com) ",
+    validation: "optional",
   },
   {
     name: "allowedTelegramAccounts",
     label:
       "Аккаунты telegram, которые могут получать уведомления. Через зяпятую. После добавления сюда нужно с этого аккаунта зайти в бот katerina_prokina_bot и нажать start",
+    validation: "optional",
   },
 ];
 
 export const settingsFields: (keyof settingsType)[] = settingsFieldsWithDividers
   .filter(
-    (item): item is { name: keyof settingsType; label: string } => !!item.name
+    (
+      item
+    ): item is {
+      name: keyof settingsType;
+      label: string;
+      validation: string;
+    } => !!item.name
   )
   .map((item) => item.name as keyof settingsType);
 
-// export const settingsFields: (keyof settingsType)[] = settingsFieldsWithDividers
-//   .filter(
-//     (item): item is { name: keyof settingsType; label: string } => !!item.name
-//   )
-//   .map((item) => item.name as keyof settingsType);
+export const settingsFieldsWithValidation: {
+  name: keyof settingsType;
+  validation: string;
+}[] = settingsFieldsWithDividers
+  .filter(
+    (
+      item
+    ): item is {
+      name: keyof settingsType;
+      label: string;
+      validation: string;
+    } => !!item.name
+  )
+  .map((item) => {
+    return { name: item.name, validation: item.validation } as {
+      name: keyof settingsType;
+      validation: string;
+    };
+  });
