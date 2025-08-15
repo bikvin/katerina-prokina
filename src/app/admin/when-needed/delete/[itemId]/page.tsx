@@ -1,8 +1,8 @@
-import DeleteWhenNeededForm from "@/components/admin/when-needed/delete/deleteWhwnNeededForm";
-
 import Header from "@/components/admin/topMenu/topMenu";
 import { db } from "@/db";
 import Link from "next/link";
+import DeleteForm from "@/components/common/delete/deleteForm";
+import { deleteWhenNeeded } from "@/actions/when-needed/delete";
 
 export default async function DeleteWhenNeededPage({
   params,
@@ -28,12 +28,13 @@ export default async function DeleteWhenNeededPage({
           </h2>
           <div className="flex justify-center gap-4 mt-10">
             <div>
-              <DeleteWhenNeededForm id={item.id} />
+              {/* <DeleteWhenNeededForm id={item.id} /> */}
+              <DeleteForm id={item.id} receivedAction={deleteWhenNeeded} />
             </div>
             <div>
               <Link
                 className={`link-button link-button-gray`}
-                href={"/admin/help"}
+                href={"/admin/when-needed"}
               >
                 Отмена
               </Link>

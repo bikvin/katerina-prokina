@@ -30,13 +30,20 @@ export const sendContactRequestEmail = async (
 
     const cleanHtml = DOMPurify.sanitize(html);
 
-    emailsArr.forEach(async (email) => {
-      await resend.emails.send({
-        from: "onboarding@resend.dev",
-        to: email,
-        subject: "Пришел новый запрос",
-        html: cleanHtml,
-      });
+    // emailsArr.forEach(async (email) => {
+    //   await resend.emails.send({
+    //     from: "onboarding@resend.dev",
+    //     to: email,
+    //     subject: "Пришел новый запрос",
+    //     html: cleanHtml,
+    //   });
+    // });
+
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: emailsArr,
+      subject: "Пришел новый запрос",
+      html: cleanHtml,
     });
   } catch (err) {
     console.log(err);

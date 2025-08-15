@@ -5,7 +5,7 @@ import { db } from "@/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function deleteWhenNeeded(
+export async function deleteContact(
   _formState: DeleteFormState,
   formData: FormData
 ): Promise<DeleteFormState> {
@@ -20,7 +20,7 @@ export async function deleteWhenNeeded(
   }
 
   try {
-    await db.whenNeeded.delete({
+    await db.contact.delete({
       where: {
         id: id,
       },
@@ -33,8 +33,7 @@ export async function deleteWhenNeeded(
     };
   }
 
-  revalidatePath("/admin/when-needed");
-  revalidatePath("/");
+  revalidatePath("/admin");
 
-  redirect("/admin/when-needed");
+  redirect("/admin");
 }
