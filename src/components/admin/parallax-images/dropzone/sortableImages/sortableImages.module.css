@@ -1,0 +1,61 @@
+.sortableItem {
+  width: 160px;
+  height: 120px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: grab;
+}
+
+.sortableContainer {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+  padding-top: 10px;
+  justify-content: flex-start;
+}
+
+.loaderIcon {
+  animation: spin-animation 1s infinite;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+}
+@keyframes spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.deleteIconBase {
+  position: absolute;
+  background-color: #fff;
+  top: 5px;
+  right: 5px;
+  height: 40px;
+  width: 40px;
+
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  display: flex;
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+.sortableItem:hover .deleteIconBase {
+  display: flex; /* Show the icon on hover */
+}
+
+.deleteIcon {
+  height: 20px;
+  width: 20px;
+}

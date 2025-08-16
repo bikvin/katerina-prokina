@@ -57,6 +57,11 @@ export default function Header({ page }: { page?: string }) {
       link: "/admin/when-needed",
       menuItemTargetPage: "whenNeeded",
     },
+    {
+      name: "Фоновые картинки",
+      link: "/admin/parallax-images",
+      menuItemTargetPage: "parallaxImages",
+    },
     { name: "Пользователь", link: "/admin/user", menuItemTargetPage: "user" },
   ];
 

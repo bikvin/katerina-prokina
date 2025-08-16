@@ -1,0 +1,62 @@
+.dropzone {
+  border: 2px dashed #bbb;
+  text-align: center;
+  padding: 30px 30px;
+  border-radius: 5px;
+  width: 100%;
+  background-color: #fff;
+
+  cursor: pointer;
+}
+.reject {
+  background-color: #e3bab5;
+  border: 2px dashed #d46b6b;
+}
+
+.accept {
+  background-color: #d0e7d2;
+  border: 2px dashed #4a894f;
+}
+
+.imagesContainer {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: flex-start;
+}
+
+.imagePreview {
+  width: 160px;
+  height: 120px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fileName {
+  text-align: center;
+}
+.error {
+  color: var(--lighter-red-color);
+}
+
+.loaderIcon {
+  animation: spin-animation 1s infinite;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+}
+
+@keyframes spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}

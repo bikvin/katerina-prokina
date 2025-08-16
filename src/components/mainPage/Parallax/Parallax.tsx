@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 export default function Parallax({
-  imageLink,
+  filename,
   children,
 }: {
-  imageLink: string;
+  filename: string;
   children?: JSX.Element | JSX.Element[];
 }) {
   const [isIOS, setIsIOS] = useState(false);
@@ -42,6 +42,8 @@ export default function Parallax({
   }, []); // Empty dependency array ensures it runs only once on mount
 
   const isIosClass = isIOS ? "bg-scroll" : "";
+
+  const imageLink = `${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_PROTOCOL}://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_LINK}/parallax-images/${filename}`;
 
   return (
     <section

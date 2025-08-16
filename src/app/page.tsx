@@ -12,9 +12,10 @@ import Results from "@/components/mainPage/Results/Results";
 
 export default async function Home() {
   let settings;
+  let parallaxImagesArr;
 
   try {
-    const [settingsData] = await Promise.all([
+    const [settingsData, parallaxImagesData] = await Promise.all([
       db.settings.findMany({
         where: {
           field: {
@@ -22,9 +23,11 @@ export default async function Home() {
           },
         },
       }),
+
+      db.parallaxImage.findUnique({ where: { id: 1 } }),
     ]);
 
-    if (!settingsData) {
+    if (!settingsData || !parallaxImagesData) {
       return <div className="text-red-800">Данные не найдены.</div>;
     }
 
@@ -34,6 +37,8 @@ export default async function Home() {
         settingsData.find((el) => el.field === field)?.value || "",
       ])
     );
+
+    parallaxImagesArr = JSON.parse(parallaxImagesData.fileNamesArr);
   } catch (err) {
     console.log(err);
     return <div className="text-red-800">Ошибка при загрузке данных.</div>;
@@ -46,34 +51,25 @@ export default async function Home() {
         {settings.test && settings.test}
       </div>
       <HeroSection header={settings.header1} subHeader={settings.subHeader1} />
-      {/* <LongImageBar imageLink={"/img/bar/red6.jpg"} /> */}
-      <Parallax imageLink="/img/bar/room1.jpg" />
+
+      <Parallax filename={parallaxImagesArr[0].name} />
       <Video
         header={settings.header2}
         subHeader={settings.subHeader2}
         rutubeLink={settings.rutubeLink}
         youtubeLink={settings.youtubeLink}
       />
-      {/* <LongImageBar imageLink={"/img/bar/red5.jpg"} /> */}
-      {/* <Parallax imageLink="/img/bar/room2.jpg" /> */}
-      {/* <About aboutData={about} /> */}
 
-      {/* <LongImageBar imageLink={"/img/bar/red7.jpg"} /> */}
-      <Parallax imageLink="/img/bar/room3.jpg" />
+      <Parallax filename={parallaxImagesArr[1].name} />
 
       <WhenNeededServer />
 
-      {/* <LongImageBar imageLink={"/img/bar/red8.jpg"} /> */}
-      {/* <Prices sessionLength={settings.sessionLength} price={settings.price} /> */}
-      <Parallax imageLink="/img/bar/20.jpg" />
-      {/* <LongImageBar imageLink={"/img/bar/red1.jpg"} /> */}
+      <Parallax filename={parallaxImagesArr[2].name} />
+
       <Results />
-      <Parallax imageLink="/img/bar/room4.jpg" />
+      <Parallax filename={parallaxImagesArr[3].name} />
       <Contacts telegram={settings.telegram} phone={settings.phone} />
 
-      {/* <LongImageBar imageLink={"/img/bar/red4.jpg"} /> */}
-
-      {/* <Links /> */}
       <Footer footerText={settings.footerText} />
     </>
   );
