@@ -12,10 +12,12 @@ export default function SettingsForm(props: settingsType) {
 
   // console.log("settingsFields", settingsFields);
 
-  let successMessage = null;
-  if (formState.success) {
-    successMessage = formState.success.message;
-  }
+  // let successMessage = null;
+  // if (formState.success) {
+  //   successMessage = formState.success.message;
+  // }
+
+  const successMessage = formState.success ? formState.success.message : null;
 
   return (
     <form className={`admin-form`} action={action}>

@@ -29,7 +29,8 @@ async function uploadFileToS3(
   const dotLastIndex = fileName.lastIndexOf(".");
   // const fileNameNoExt = fileName.substring(0, dotLastIndex);
   const fileExt = fileName.substring(dotLastIndex + 1, fileName.length);
-  const randomFileName = uuidv4();
+  const fileNameNoExt = fileName.slice(0, dotLastIndex);
+  const randomFileName = `${fileNameNoExt}-${uuidv4()}`;
   const randomFileNameExt = `${randomFileName}.${fileExt}`;
 
   const params = {
@@ -41,8 +42,8 @@ async function uploadFileToS3(
 
   const command = new PutObjectCommand(params);
   try {
-    const response = await s3Client.send(command);
-    console.log("File Uploaded Successfully", response);
+    await s3Client.send(command);
+    // console.log("File Uploaded Successfully", response);
     return randomFileNameExt;
   } catch (error) {
     console.log("Error", error);
@@ -56,7 +57,7 @@ export async function POST(request: Request) {
     const file = formData.get("file");
     const directory = formData.get("directory");
 
-    console.log("directory", directory);
+    // console.log("directory", directory);
 
     if (!file || !(file instanceof File)) {
       return NextResponse.json({ error: "File is required." }, { status: 400 });

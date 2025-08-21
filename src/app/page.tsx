@@ -24,7 +24,7 @@ export default async function Home() {
         },
       }),
 
-      db.parallaxImage.findUnique({ where: { id: 1 } }),
+      db.imageGroupArray.findUnique({ where: { imageGroupName: "parallax" } }),
     ]);
 
     if (!settingsData || !parallaxImagesData) {

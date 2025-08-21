@@ -1,19 +1,21 @@
 "use server";
 
 import { db } from "@/db";
-import { redirect } from "next/navigation";
 
 import { revalidatePath } from "next/cache";
 
 interface EditParallaxImagesFormState {
-  errors: {
+  errors?: {
     imagesArr?: string[];
     id?: string[];
     _form?: string[];
   };
+  success?: {
+    message: string;
+  };
 }
 
-export async function editParallaxImages(
+export async function EditParallaxImages(
   formState: EditParallaxImagesFormState,
   formData: FormData
 ): Promise<EditParallaxImagesFormState> {
@@ -57,5 +59,7 @@ export async function editParallaxImages(
   }
   revalidatePath("/");
   revalidatePath("/admin/parallax-images");
-  redirect("/admin");
+  return {
+    success: { message: "Сохранено" },
+  };
 }
