@@ -3,7 +3,7 @@ export const loadToS3 = async (file: File, directory: string) => {
   formData.append("file", file);
   formData.append("directory", directory);
 
-  const response = await fetch("/api/s3-upload", {
+  const response = await fetch("/api/s3/upload", {
     method: "POST",
     body: formData,
   });

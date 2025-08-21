@@ -24,7 +24,7 @@ export function EditImagesForm({
   const [photoNames, setPhotoNames] = useState(imageData);
 
   return (
-    <form className={`adminForm`} action={action}>
+    <form className={`adminForm mb-10`} action={action}>
       <div>
         <DropzoneInput
           photoNames={photoNames}

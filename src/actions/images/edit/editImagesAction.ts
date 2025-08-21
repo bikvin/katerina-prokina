@@ -4,6 +4,7 @@ import { db } from "@/db";
 
 import { revalidatePath } from "next/cache";
 import { editImagesSchema } from "@/zod/images/imagesSchema";
+import { deleteUnusedFromS3 } from "@/lib/awsS3/deleteUnusedFromS3";
 
 interface EditImagesFormState {
   errors?: {
@@ -21,14 +22,6 @@ export async function EditImagesAction(
   formData: FormData
 ): Promise<EditImagesFormState> {
   // const imagesArrString = formData.get("imagesArr");
-
-  // if (!imagesArrString || typeof imagesArrString !== "string") {
-  //   return {
-  //     errors: {
-  //       _form: ["Error updating. String must not be null."],
-  //     },
-  //   };
-  // }
 
   const result = editImagesSchema.safeParse({
     imageGroup: formData.get("imageGroup"),
@@ -54,6 +47,11 @@ export async function EditImagesAction(
         imageGroupName: result.data.imageGroup,
       },
     });
+
+    await deleteUnusedFromS3(
+      `${result.data.imageGroup}-images`,
+      result.data.imagesArrString
+    );
   } catch (err: unknown) {
     if (err instanceof Error) {
       return {
@@ -69,6 +67,7 @@ export async function EditImagesAction(
       };
     }
   }
+
   revalidatePath("/");
   revalidatePath(`/admin/${result.data.imageGroup}-images`);
   return {
