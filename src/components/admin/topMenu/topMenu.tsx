@@ -4,7 +4,9 @@ import { logout } from "@/actions/auth";
 import TopMenuItem from "./topMenuItem";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-export default function Header({ page }: { page?: string }) {
+import TopMenuDropdown from "./TopMenuDropdown";
+
+export function TopMenu() {
   const [maxHeight, setMaxHeight] = useState<string>("0px");
   const [isMobile, setIsMobile] = useState<boolean>(false); // Track if the view is mobile
   const [isMounted, setIsMounted] = useState(false);
@@ -41,28 +43,59 @@ export default function Header({ page }: { page?: string }) {
     }
   };
 
-  const topMenuList = [
+  type TopMenuItemBase = {
+    name: string;
+  };
+
+  type TopMenuItemLink = TopMenuItemBase & {
+    type: "link";
+    link: string;
+  };
+
+  type TopMenuDropDown = TopMenuItemBase & {
+    type: "dropdown";
+    data: TopMenuItemLink[];
+  };
+
+  type TopMenuItem = TopMenuItemLink | TopMenuDropDown;
+
+  const topMenuList: TopMenuItem[] = [
     {
+      type: "link",
       name: "Главная",
       link: "/admin",
-      menuItemTargetPage: "main",
     },
     {
+      type: "link",
       name: "Основные Настройки",
       link: "/admin/settings",
-      menuItemTargetPage: "settings",
     },
     {
+      type: "link",
       name: "Когда нужна терапия",
       link: "/admin/when-needed",
-      menuItemTargetPage: "whenNeeded",
     },
     {
-      name: "Фоновые картинки",
-      link: "/admin/parallax-images",
-      menuItemTargetPage: "parallaxImages",
+      name: "Картинки",
+      type: "dropdown",
+      data: [
+        {
+          type: "link",
+          name: "Фоновые картинки",
+          link: "/admin/parallax-images",
+        },
+        {
+          type: "link",
+          name: "Аватары",
+          link: "/admin/avatar-images",
+        },
+      ],
     },
-    { name: "Пользователь", link: "/admin/user", menuItemTargetPage: "user" },
+    {
+      type: "link",
+      name: "Пользователь",
+      link: "/admin/user",
+    },
   ];
 
   return (
@@ -80,16 +113,23 @@ export default function Header({ page }: { page?: string }) {
           className={`overflow-hidden transition-[max-height] duration-500 ease-in-out md:flex flex-col md:flex-row justify-center md:justify-end items-center gap-2 tracking-wide max-h-0 md:max-h-full`}
           style={{ maxHeight: isMobile && isMounted ? maxHeight : undefined }} // Only apply maxHeight on mobile
         >
-          {topMenuList.map((item) => (
-            <TopMenuItem
-              key={item.name}
-              currentPage={page}
-              menuItemTargetPage={item.menuItemTargetPage}
-              link={item.link}
-            >
-              {item.name}
-            </TopMenuItem>
-          ))}
+          {topMenuList.map((item) => {
+            if (item.type === "link") {
+              return (
+                <TopMenuItem key={item.name} link={item.link}>
+                  {item.name}
+                </TopMenuItem>
+              );
+            } else if (item.type === "dropdown") {
+              return (
+                <TopMenuDropdown
+                  key={item.name}
+                  name={item.name}
+                  data={item.data}
+                />
+              );
+            }
+          })}
 
           <li className="text-center pb-2 md:pb-0   hover:text-black transition-colors  hover:underline ">
             <div>

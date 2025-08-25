@@ -3,25 +3,25 @@ import { TopMenu } from "@/components/admin/topMenu/TopMenu";
 import { EditImagesForm } from "@/components/admin/images/edit/editImagesForm";
 import { db } from "@/db";
 
-export default async function ParallaxImagesEditPage() {
-  const IMAGE_GROUP = "parallax";
+export default async function AvatarImagesEditPage() {
+  const IMAGE_GROUP = "avatar";
 
-  const parallaxImages = await db.imageGroupArray.findUnique({
+  const avatarImages = await db.imageGroupArray.findUnique({
     where: { imageGroupName: IMAGE_GROUP },
   });
 
-  const arrString = parallaxImages ? parallaxImages.fileNamesArr : "[]";
+  const arrString = avatarImages ? avatarImages.fileNamesArr : "[]";
 
-  const parallaxImagesData = JSON.parse(arrString);
+  const avatarImagesData = JSON.parse(arrString);
 
   return (
     <>
       <TopMenu />
       <div className="max-w-screen-lg mx-auto ">
         <div className={`adminFormContainer w-[80%] mx-auto`}>
-          <h1 className="admin-form-header mt-10">Фото для фона</h1>
+          <h1 className="admin-form-header mt-10">Фото для аватара</h1>
           <EditImagesForm
-            imageData={parallaxImagesData}
+            imageData={avatarImagesData}
             imageGroup={IMAGE_GROUP}
           />
         </div>

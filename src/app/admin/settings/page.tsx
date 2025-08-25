@@ -1,5 +1,5 @@
 import SettingsForm from "@/components/admin/settings/SettingsForm";
-import Header from "@/components/admin/topMenu/topMenu";
+import { TopMenu } from "@/components/admin/topMenu/TopMenu";
 import { db } from "@/db";
 import {
   settingsFields,
@@ -34,7 +34,7 @@ export default async function AdminPage() {
 
   return (
     <>
-      <Header page="settings" />
+      <TopMenu />
 
       <div className="max-w-screen-lg mx-auto ">
         <div className="w-[90%] md:w-2/3 mx-auto">

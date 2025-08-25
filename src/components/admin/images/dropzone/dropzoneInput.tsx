@@ -127,6 +127,7 @@ function DropzoneInput({
           deleteFile={deleteFile}
           isDeleting={isDeleting}
           setIsDeleting={setIsDeleting}
+          dirName={dirName}
         />
       </div>
     </section>

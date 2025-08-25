@@ -11,11 +11,13 @@ export function SortableItem({
   name,
   deleteFile,
   disabled,
+  dirName,
 }: {
   id: string;
   name: string;
   deleteFile: (id: string) => void;
   disabled: boolean;
+  dirName: string;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id, disabled: disabled });
@@ -40,7 +42,7 @@ export function SortableItem({
       {
         <div key={id}>
           <Image
-            src={`${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_PROTOCOL}://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_LINK}/parallax-images/${name}`}
+            src={`${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_PROTOCOL}://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_LINK}/${dirName}/${name}`}
             alt=""
             width={320}
             height={240}

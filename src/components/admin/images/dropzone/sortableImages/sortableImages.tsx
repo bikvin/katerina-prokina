@@ -29,6 +29,7 @@ export default function SortableImages({
   deleteFile,
   isDeleting,
   setIsDeleting,
+  dirName,
 }: {
   isUploadingFilesNumber: number;
   photoNames: ImageObj[];
@@ -36,6 +37,7 @@ export default function SortableImages({
   deleteFile: (id: string) => void;
   isDeleting: boolean;
   setIsDeleting: Dispatch<SetStateAction<boolean>>;
+  dirName: string;
 }) {
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -89,6 +91,7 @@ export default function SortableImages({
               name={photoName.name}
               deleteFile={deleteFile}
               disabled={false}
+              dirName={dirName}
             />
           ))}
 

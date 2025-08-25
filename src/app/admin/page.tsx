@@ -1,5 +1,5 @@
 import ContactsList from "@/components/admin/contacts/ContactsList";
-import Header from "@/components/admin/topMenu/topMenu";
+import { TopMenu } from "@/components/admin/topMenu/TopMenu";
 import { db } from "@/db";
 import type { Contact } from "@prisma/client";
 export default async function AdminPage() {
@@ -25,7 +25,7 @@ export default async function AdminPage() {
 
   return (
     <>
-      <Header page="main" />
+      <TopMenu />
 
       <div className="max-w-screen-lg mx-auto ">
         <div className="w-[90%] md:w-2/3 mx-auto">

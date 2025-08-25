@@ -1,4 +1,4 @@
-import Header from "@/components/admin/topMenu/topMenu";
+import { TopMenu } from "@/components/admin/topMenu/TopMenu";
 import { db } from "@/db";
 import Link from "next/link";
 import DeleteForm from "@/components/common/delete/deleteForm";
@@ -19,7 +19,7 @@ export default async function DeleteWhenNeededPage({
 
   return (
     <>
-      <Header page="help" />
+      <TopMenu />
       <div className="max-w-screen-lg mx-auto ">
         <div className={`card w-1/2 mt-20 mx-auto mb-10`}>
           <h2 className="text-xl">

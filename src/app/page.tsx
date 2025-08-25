@@ -13,21 +13,29 @@ import Results from "@/components/mainPage/Results/Results";
 export default async function Home() {
   let settings;
   let parallaxImagesArr;
+  let avatarImagesArr;
 
   try {
-    const [settingsData, parallaxImagesData] = await Promise.all([
-      db.settings.findMany({
-        where: {
-          field: {
-            in: settingsFields,
+    const [settingsData, parallaxImagesData, avatarImagesData] =
+      await Promise.all([
+        db.settings.findMany({
+          where: {
+            field: {
+              in: settingsFields,
+            },
           },
-        },
-      }),
+        }),
 
-      db.imageGroupArray.findUnique({ where: { imageGroupName: "parallax" } }),
-    ]);
+        db.imageGroupArray.findUnique({
+          where: { imageGroupName: "parallax" },
+        }),
 
-    if (!settingsData || !parallaxImagesData) {
+        db.imageGroupArray.findUnique({
+          where: { imageGroupName: "avatar" },
+        }),
+      ]);
+
+    if (!settingsData || !parallaxImagesData || !avatarImagesData) {
       return <div className="text-red-800">Данные не найдены.</div>;
     }
 
@@ -39,6 +47,7 @@ export default async function Home() {
     );
 
     parallaxImagesArr = JSON.parse(parallaxImagesData.fileNamesArr);
+    avatarImagesArr = JSON.parse(avatarImagesData.fileNamesArr);
   } catch (err) {
     console.log(err);
     return <div className="text-red-800">Ошибка при загрузке данных.</div>;
@@ -50,7 +59,11 @@ export default async function Home() {
       <div className="border-b border-gray-200">
         {settings.test && settings.test}
       </div>
-      <HeroSection header={settings.header1} subHeader={settings.subHeader1} />
+      <HeroSection
+        header={settings.header1}
+        subHeader={settings.subHeader1}
+        imageFilename={avatarImagesArr[0].name}
+      />
 
       <Parallax filename={parallaxImagesArr[0].name} />
       <Video

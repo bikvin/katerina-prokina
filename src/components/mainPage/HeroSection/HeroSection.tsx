@@ -7,9 +7,11 @@ import DarkRedButton from "@/components/common/darkRedButton";
 export default function HeroSection({
   header,
   subHeader,
+  imageFilename,
 }: {
   header: string;
   subHeader: string;
+  imageFilename: string;
 }) {
   return (
     <section className="py-0 md:py-20 px-4 md:px-10  overflow-x-hidden max-w-screen-lg mx-auto flex  md:flex-row flex-col-reverse mb-10 mt-10 md:mt-0">
@@ -48,7 +50,7 @@ export default function HeroSection({
         className="flex-1 min-h-[450px] flex justify-center items-center relative"
       >
         <Image
-          src="/img/photo2.jpeg"
+          src={`${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_PROTOCOL}://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_LINK}/avatar-images/${imageFilename}`}
           width="300"
           height="200"
           alt={header}
