@@ -91,6 +91,7 @@ function DropzoneInput({
       "image/jpeg": [],
       "image/png": [],
     },
+    maxSize: 1024 * 1024, // 1 MB in bytes
   });
 
   const classes = clsx(
@@ -110,11 +111,26 @@ function DropzoneInput({
         <input {...getInputProps()} />
         <p>Выберите файл или перетащите сюда.</p>
       </div>
+
       <ul>
         {fileRejections.length > 0 &&
           fileRejections.map((rejection, index) => (
-            <li key={index} className={"error"}>
-              Неверный формат файла – {rejection?.file?.name}
+            <li key={index} className="error">
+              {rejection.file.name} –{" "}
+              {rejection.errors.map((e) => {
+                switch (e.code) {
+                  case "file-too-large":
+                    return (
+                      <span key={e.code}>
+                        Файл слишком большой, максимум 1 МБ
+                      </span>
+                    );
+                  case "file-invalid-type":
+                    return <span key={e.code}>Неверный формат файла</span>;
+                  default:
+                    return <span key={e.code}>{e.message}</span>;
+                }
+              })}
             </li>
           ))}
       </ul>
