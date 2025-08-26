@@ -4,7 +4,7 @@ import React from "react";
 import { db } from "@/db";
 import WhenNeededClient from "./WhenNeededClient";
 
-export default async function WhenNeededServer() {
+export default async function WhenNeededServer({ header }: { header: string }) {
   let itemsData: { id: string; header: string; text: string }[];
   itemsData = [];
 
@@ -19,5 +19,5 @@ export default async function WhenNeededServer() {
     console.log(err);
   }
 
-  return <WhenNeededClient itemsData={itemsData} />;
+  return <WhenNeededClient header={header} itemsData={itemsData} />;
 }

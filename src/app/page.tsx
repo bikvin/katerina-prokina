@@ -83,15 +83,15 @@ export default async function Home() {
 
       <Parallax filename={parallaxImagesArr[0].name} />
       <Video
-        header={settings.header2}
-        subHeader={settings.subHeader2}
+        header={settings.headerVideo}
+        subHeader={settings.subHeaderVideo}
         rutubeLink={settings.rutubeLink}
         youtubeLink={settings.youtubeLink}
       />
 
       <Parallax filename={parallaxImagesArr[1].name} />
 
-      <WhenNeededServer />
+      <WhenNeededServer header={settings.headerWhenneeded} />
 
       <Parallax filename={parallaxImagesArr[2].name} />
 

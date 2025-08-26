@@ -4,25 +4,11 @@ import parse from "html-react-parser";
 
 import { motion } from "framer-motion";
 
-// const options: HTMLReactParserOptions = {
-//   replace: (domNode) => {
-//     if (domNode.type === "tag" && domNode.name === "ul") {
-//       const el = domNode as Element;
-//       return (
-//         <ul className="list-[square] pl-6">
-//           {domToReact(
-//             el.children as import("html-react-parser").DOMNode[],
-//             options
-//           )}
-//         </ul>
-//       );
-//     }
-//   },
-// };
-
 export default function WhenNeededClient({
+  header,
   itemsData,
 }: {
+  header: string;
   itemsData: { id: string; header: string; text: string }[];
 }) {
   return (
@@ -31,9 +17,7 @@ export default function WhenNeededClient({
         id="when-needed"
         className="py-16 md:py-20 px-8 md:px-10  overflow-x-hidden max-w-screen-lg mx-auto flex flex-col"
       >
-        <h2 className="font-bold text-slate-800 text-4xl mb-8">
-          Когда необходима помощь?
-        </h2>
+        <h2 className="font-bold text-slate-800 text-4xl mb-8">{header}</h2>
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}

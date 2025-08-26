@@ -29,8 +29,13 @@ export const settingsFieldsWithDividers = [
   { name: "header1", label: "Заголовок 1", validation: "required" },
   { name: "subHeader1", label: "Подзаголовок 1", validation: "required" },
   { divider: true },
-  { name: "header2", label: "Заголовок 2", validation: "required" },
-  { name: "subHeader2", label: "Подзаголовок 2", validation: "required" },
+  { name: "headerVideo", label: "Заголовок видео", validation: "required" },
+  {
+    name: "subHeaderVideo",
+    label: "Подзаголовок видео",
+    validation: "required",
+  },
+
   {
     name: "rutubeLink",
     label: "Ссылка видео с Rutube (например https://rutube.ru/play/embed/.../)",
@@ -40,6 +45,12 @@ export const settingsFieldsWithDividers = [
     name: "youtubeLink",
     label:
       "Ссылка видео с Youtube (например https://youtu.be/1umP_iO_obw?si=...)",
+    validation: "required",
+  },
+  { divider: true },
+  {
+    name: "headerWhenneeded",
+    label: "Заголовок когда необходимо",
     validation: "required",
   },
 
