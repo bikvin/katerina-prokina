@@ -109,6 +109,7 @@ export default async function Home() {
         header={settings.contactsHeader}
         telegram={settings.telegram}
         phone={settings.phone}
+        text={settings.contactsText}
       />
 
       <Footer footerText={settings.footerText} />

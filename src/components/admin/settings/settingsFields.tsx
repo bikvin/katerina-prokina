@@ -77,6 +77,11 @@ export const settingsFieldsWithDividers = [
     label: "Заголовок контактов",
     validation: "required",
   },
+  {
+    name: "contactsText",
+    label: "Текст для контактов",
+    validation: "required",
+  },
   { name: "telegram", label: "Telegram", validation: "required" },
   { name: "phone", label: "Телефон", validation: "required" },
 

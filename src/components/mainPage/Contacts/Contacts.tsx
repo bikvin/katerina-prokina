@@ -3,15 +3,18 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import ContactForm from "../ContactForm/ContactForm";
+import YandexMap from "./YandexMap";
 
 export default function Contacts({
   header,
   telegram,
   phone,
+  text,
 }: {
   header: string;
   telegram: string;
   phone: string;
+  text: string;
 }) {
   return (
     <section
@@ -42,7 +45,7 @@ export default function Contacts({
             Telegram : <b>{telegram}</b>
           </a>
         </div>
-        <div className="">
+        <div className="mb-10">
           <a
             href={`https://wa.me/${phone.replace(/\D/g, "")}`}
             className="flex  text-lg items-center justify-start gap-2 hover:scale-110 origin-[0%_50%]"
@@ -57,6 +60,8 @@ export default function Contacts({
             WhatsApp : <b>{phone}</b>
           </a>
         </div>
+        <h2 className="font-bold text-slate-800 text-2xl mb-4">{text}</h2>
+        <YandexMap />
       </motion.div>
     </section>
   );
