@@ -23,16 +23,14 @@ const data = [
   },
 ];
 
-export default function Results() {
+export default function Results({ header }: { header: string }) {
   return (
     <div className="">
       <section
         id="results"
         className="py-16 md:py-20 px-8 md:px-10  overflow-x-hidden max-w-screen-lg mx-auto flex flex-col"
       >
-        <h2 className="font-bold text-slate-800 text-4xl mb-8">
-          Каких результатов можно достичь в психотерапии?
-        </h2>
+        <h2 className="font-bold text-slate-800 text-4xl mb-8">{header}</h2>
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}

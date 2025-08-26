@@ -5,9 +5,11 @@ import { motion } from "framer-motion";
 import ContactForm from "../ContactForm/ContactForm";
 
 export default function Contacts({
+  header,
   telegram,
   phone,
 }: {
+  header: string;
   telegram: string;
   phone: string;
 }) {
@@ -16,7 +18,7 @@ export default function Contacts({
       id="contacts"
       className="py-16 md:py-20 px-8 md:px-10  overflow-x-hidden max-w-screen-lg mx-auto flex flex-col"
     >
-      <h2 className="font-bold text-slate-800 text-4xl mb-8">Напишите мне:</h2>
+      <h2 className="font-bold text-slate-800 text-4xl mb-8">{header}</h2>
 
       <motion.div
         initial={{ opacity: 0, x: -100 }}

@@ -56,6 +56,12 @@ export const settingsFieldsWithDividers = [
 
   { divider: true },
   {
+    name: "resultsHeader",
+    label: "Заголовок результаты",
+    validation: "required",
+  },
+  { divider: true },
+  {
     name: "movieclubHeader",
     label: "Заголовок киноклуба",
     validation: "required",
@@ -66,6 +72,11 @@ export const settingsFieldsWithDividers = [
     validation: "required",
   },
   { divider: true },
+  {
+    name: "contactsHeader",
+    label: "Заголовок контактов",
+    validation: "required",
+  },
   { name: "telegram", label: "Telegram", validation: "required" },
   { name: "phone", label: "Телефон", validation: "required" },
 

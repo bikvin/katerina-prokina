@@ -95,7 +95,7 @@ export default async function Home() {
 
       <Parallax filename={parallaxImagesArr[2].name} />
 
-      <Results />
+      <Results header={settings.resultsHeader} />
       <Parallax filename={parallaxImagesArr[3].name} />
 
       <Movieclub
@@ -105,7 +105,11 @@ export default async function Home() {
       />
       <Parallax filename={parallaxImagesArr[4].name} />
 
-      <Contacts telegram={settings.telegram} phone={settings.phone} />
+      <Contacts
+        header={settings.contactsHeader}
+        telegram={settings.telegram}
+        phone={settings.phone}
+      />
 
       <Footer footerText={settings.footerText} />
     </>
