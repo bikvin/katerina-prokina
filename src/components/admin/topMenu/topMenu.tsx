@@ -6,6 +6,65 @@ import { RxHamburgerMenu } from "react-icons/rx";
 
 import TopMenuDropdown from "./TopMenuDropdown";
 
+type TopMenuItemBase = {
+  name: string;
+};
+
+type TopMenuItemLink = TopMenuItemBase & {
+  type: "link";
+  link: string;
+};
+
+type TopMenuDropDown = TopMenuItemBase & {
+  type: "dropdown";
+  data: TopMenuItemLink[];
+};
+
+type TopMenuItem = TopMenuItemLink | TopMenuDropDown;
+const topMenuList: TopMenuItem[] = [
+  {
+    type: "link",
+    name: "Главная",
+    link: "/admin",
+  },
+  {
+    type: "link",
+    name: "Основные Настройки",
+    link: "/admin/settings",
+  },
+  {
+    type: "link",
+    name: "Когда нужна терапия",
+    link: "/admin/when-needed",
+  },
+  {
+    name: "Картинки",
+    type: "dropdown",
+    data: [
+      {
+        type: "link",
+        name: "Фоновые картинки",
+        link: "/admin/image-upload/parallax-images",
+      },
+      {
+        type: "link",
+        name: "Аватары",
+        link: "/admin/image-upload/avatar-images",
+      },
+      {
+        type: "link",
+        name: "Киноклуб",
+        link: "/admin/image-upload/movieclub-images",
+      },
+    ],
+  },
+  {
+    type: "link",
+    name: "Пользователь",
+    link: "/admin/user",
+  },
+];
+
 export function TopMenu() {
   const [maxHeight, setMaxHeight] = useState<string>("0px");
   const [isMobile, setIsMobile] = useState<boolean>(false); // Track if the view is mobile
@@ -42,61 +101,6 @@ export function TopMenu() {
       }
     }
   };
-
-  type TopMenuItemBase = {
-    name: string;
-  };
-
-  type TopMenuItemLink = TopMenuItemBase & {
-    type: "link";
-    link: string;
-  };
-
-  type TopMenuDropDown = TopMenuItemBase & {
-    type: "dropdown";
-    data: TopMenuItemLink[];
-  };
-
-  type TopMenuItem = TopMenuItemLink | TopMenuDropDown;
-
-  const topMenuList: TopMenuItem[] = [
-    {
-      type: "link",
-      name: "Главная",
-      link: "/admin",
-    },
-    {
-      type: "link",
-      name: "Основные Настройки",
-      link: "/admin/settings",
-    },
-    {
-      type: "link",
-      name: "Когда нужна терапия",
-      link: "/admin/when-needed",
-    },
-    {
-      name: "Картинки",
-      type: "dropdown",
-      data: [
-        {
-          type: "link",
-          name: "Фоновые картинки",
-          link: "/admin/parallax-images",
-        },
-        {
-          type: "link",
-          name: "Аватары",
-          link: "/admin/avatar-images",
-        },
-      ],
-    },
-    {
-      type: "link",
-      name: "Пользователь",
-      link: "/admin/user",
-    },
-  ];
 
   return (
     <header className="bg-green8  px-8">

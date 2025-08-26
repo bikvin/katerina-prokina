@@ -44,6 +44,17 @@ export const settingsFieldsWithDividers = [
   },
 
   { divider: true },
+  {
+    name: "movieclubHeader",
+    label: "Заголовок киноклуба",
+    validation: "required",
+  },
+  {
+    name: "movieclubText",
+    label: "Описание киноклуба",
+    validation: "required",
+  },
+  { divider: true },
   { name: "telegram", label: "Telegram", validation: "required" },
   { name: "phone", label: "Телефон", validation: "required" },
 

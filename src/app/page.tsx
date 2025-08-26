@@ -9,33 +9,48 @@ import { settingsFields } from "@/components/admin/settings/settingsFields";
 import Parallax from "@/components/mainPage/Parallax/Parallax";
 import WhenNeededServer from "@/components/mainPage/WhenNeeded/WhenNeededServer";
 import Results from "@/components/mainPage/Results/Results";
+import Movieclub from "@/components/mainPage/Movieclub/Movieclub";
 
 export default async function Home() {
   let settings;
   let parallaxImagesArr;
   let avatarImagesArr;
+  let movieclubImagesArr;
 
   try {
-    const [settingsData, parallaxImagesData, avatarImagesData] =
-      await Promise.all([
-        db.settings.findMany({
-          where: {
-            field: {
-              in: settingsFields,
-            },
+    const [
+      settingsData,
+      parallaxImagesData,
+      avatarImagesData,
+      movieclubImagesData,
+    ] = await Promise.all([
+      db.settings.findMany({
+        where: {
+          field: {
+            in: settingsFields,
           },
-        }),
+        },
+      }),
 
-        db.imageGroupArray.findUnique({
-          where: { imageGroupName: "parallax" },
-        }),
+      db.imageGroupArray.findUnique({
+        where: { imageGroupName: "parallax" },
+      }),
 
-        db.imageGroupArray.findUnique({
-          where: { imageGroupName: "avatar" },
-        }),
-      ]);
+      db.imageGroupArray.findUnique({
+        where: { imageGroupName: "avatar" },
+      }),
 
-    if (!settingsData || !parallaxImagesData || !avatarImagesData) {
+      db.imageGroupArray.findUnique({
+        where: { imageGroupName: "movieclub" },
+      }),
+    ]);
+
+    if (
+      !settingsData ||
+      !parallaxImagesData ||
+      !avatarImagesData ||
+      !movieclubImagesData
+    ) {
       return <div className="text-red-800">Данные не найдены.</div>;
     }
 
@@ -48,6 +63,7 @@ export default async function Home() {
 
     parallaxImagesArr = JSON.parse(parallaxImagesData.fileNamesArr);
     avatarImagesArr = JSON.parse(avatarImagesData.fileNamesArr);
+    movieclubImagesArr = JSON.parse(movieclubImagesData.fileNamesArr);
   } catch (err) {
     console.log(err);
     return <div className="text-red-800">Ошибка при загрузке данных.</div>;
@@ -81,6 +97,14 @@ export default async function Home() {
 
       <Results />
       <Parallax filename={parallaxImagesArr[3].name} />
+
+      <Movieclub
+        header={settings.movieclubHeader}
+        text={settings.movieclubText}
+        imageFilename={movieclubImagesArr[0].name}
+      />
+      <Parallax filename={parallaxImagesArr[4].name} />
+
       <Contacts telegram={settings.telegram} phone={settings.phone} />
 
       <Footer footerText={settings.footerText} />
