@@ -20,6 +20,7 @@ type TopMenuDropDown = TopMenuItemBase & {
   data: TopMenuItemLink[];
 };
 
+// change menu items here
 type TopMenuItem = TopMenuItemLink | TopMenuDropDown;
 const topMenuList: TopMenuItem[] = [
   {
