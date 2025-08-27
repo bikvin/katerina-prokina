@@ -22,7 +22,9 @@ export default function TopMenuDropdown({
   return (
     <DropdownMenu key={name}>
       <DropdownMenuTrigger
-        className={`hover:underline ${isActive ? "underline" : ""}`}
+        className={`block mx-auto md:mx-0 pb-2 md:pb-0 outline-none focus:outline-none ring-0 focus:ring-0 hover:underline ${
+          isActive ? "underline" : ""
+        }`}
       >
         {name}
       </DropdownMenuTrigger>

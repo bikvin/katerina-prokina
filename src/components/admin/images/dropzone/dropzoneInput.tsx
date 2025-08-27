@@ -24,6 +24,10 @@ function DropzoneInput({
 
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const [customRejections, setCustomRejections] = useState<
+    { file: File; errors: { code: string; message: string }[] }[]
+  >([]);
+
   const addNewFile = (fileName: string) => {
     setPhotoNames((prevPhotoNames) => [
       ...prevPhotoNames,
@@ -50,11 +54,35 @@ function DropzoneInput({
     });
   };
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles.length == 0) return;
+  const onDrop = useCallback((autoAcceptedFiles: File[]) => {
+    console.log("OnDrop");
+    console.log("autoAcceptedFiles", autoAcceptedFiles);
 
-    setIsUploadingFilesNumber(acceptedFiles.length);
-    acceptedFiles.forEach((file) => {
+    if (autoAcceptedFiles.length == 0) return;
+
+    const newCustomRejections: typeof customRejections = [];
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+    autoAcceptedFiles.forEach((file) => {
+      if (!allowedTypes.includes(file.type)) {
+        newCustomRejections.push({
+          file,
+          errors: [
+            { code: "file-invalid-type", message: "Неверный формат файла" },
+          ],
+        });
+      }
+    });
+
+    // Filter out manually rejected files from acceptedFiles
+    const filteredAccepted = autoAcceptedFiles.filter(
+      (file) => allowedTypes.includes(file.type) // only allowed types
+    );
+
+    // console.log("acceptedFiles", acceptedFiles);
+
+    setIsUploadingFilesNumber(filteredAccepted.length);
+    filteredAccepted.forEach((file) => {
       const reader = new FileReader();
 
       reader.onerror = () => console.log("file reading has failed");
@@ -76,6 +104,8 @@ function DropzoneInput({
       };
       reader.readAsArrayBuffer(file);
     });
+
+    setCustomRejections(newCustomRejections);
   }, []);
 
   const {
@@ -87,9 +117,13 @@ function DropzoneInput({
     isDragReject,
   } = useDropzone({
     onDrop,
-    accept: {
-      "image/*": [],
-    },
+    // accept: {
+    //   "image/jpeg": [],
+    //   "image/jpg": [],
+    //   "image/pjpeg": [],
+    //   "image/png": [],
+    //   "image/webp": [],
+    // },
     maxSize: 1024 * 1024, // 1 MB in bytes
   });
 
@@ -100,6 +134,7 @@ function DropzoneInput({
     !isDragAccept && !isDragReject && "border-zinc-400 bg-white" // default fallback
   );
 
+  // console.log("dropZone");
   return (
     <section className="container">
       <div
@@ -107,31 +142,35 @@ function DropzoneInput({
           className: classes,
         })}
       >
-        <input {...getInputProps()} />
+        {/* <input {...getInputProps()} /> */}
         <p>Выберите файл или перетащите сюда.</p>
       </div>
+      <input
+        {...getInputProps({
+          onClick: () => console.log("file input clicked"),
+        })}
+      />
 
       <ul>
-        {fileRejections.length > 0 &&
-          fileRejections.map((rejection, index) => (
-            <li key={index} className="error">
-              {rejection.file.name} –{" "}
-              {rejection.errors.map((e) => {
-                switch (e.code) {
-                  case "file-too-large":
-                    return (
-                      <span key={e.code}>
-                        Файл слишком большой, максимум 1 МБ
-                      </span>
-                    );
-                  case "file-invalid-type":
-                    return <span key={e.code}>Неверный формат файла</span>;
-                  default:
-                    return <span key={e.code}>{e.message}</span>;
-                }
-              })}
-            </li>
-          ))}
+        {[...fileRejections, ...customRejections].map((rejection, index) => (
+          <li key={index} className="error">
+            {rejection.file.name} –{" "}
+            {rejection.errors.map((e) => {
+              switch (e.code) {
+                case "file-too-large":
+                  return (
+                    <span key={e.code}>
+                      Файл слишком большой, максимум 1 МБ
+                    </span>
+                  );
+                case "file-invalid-type":
+                  return <span key={e.code}>Неверный формат файла</span>;
+                default:
+                  return <span key={e.code}>{e.message}</span>;
+              }
+            })}
+          </li>
+        ))}
       </ul>
 
       <div>
