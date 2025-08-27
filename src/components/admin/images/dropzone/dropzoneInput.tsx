@@ -88,8 +88,7 @@ function DropzoneInput({
   } = useDropzone({
     onDrop,
     accept: {
-      "image/jpeg": [],
-      "image/png": [],
+      "image/*": [],
     },
     maxSize: 1024 * 1024, // 1 MB in bytes
   });
