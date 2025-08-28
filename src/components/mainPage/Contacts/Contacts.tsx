@@ -35,6 +35,7 @@ export default function Contacts({
           <a
             href={`https://t.me/${telegram.replace(/[^\w]/g, "")}`}
             className="flex text-lg items-center justify-start gap-2 hover:scale-110 origin-[0%_50%]"
+            target="_blank"
           >
             <Image
               src="/img/icons/social-media/telegram.svg"
@@ -49,6 +50,7 @@ export default function Contacts({
           <a
             href={`https://wa.me/${phone.replace(/\D/g, "")}`}
             className="flex  text-lg items-center justify-start gap-2 hover:scale-110 origin-[0%_50%]"
+            target="_blank"
           >
             <Image
               src="/img/icons/social-media/whatsapp.svg"
@@ -59,6 +61,7 @@ export default function Contacts({
             />
             WhatsApp : <b>{phone}</b>
           </a>
+          <p>Нажмите, чтобы перейти в приложение</p>
         </div>
         <h2 className="font-bold text-slate-800 text-2xl mb-4">{text}</h2>
         <YandexMap />
