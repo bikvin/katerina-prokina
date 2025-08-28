@@ -69,7 +69,7 @@ export async function EditImagesAction(
   }
 
   revalidatePath("/");
-  revalidatePath(`/admin/${result.data.imageGroup}-images`);
+  revalidatePath(`/admin/image-uploads/${result.data.imageGroup}-images`);
   return {
     success: { message: "Сохранено" },
   };
