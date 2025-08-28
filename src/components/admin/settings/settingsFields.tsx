@@ -21,14 +21,18 @@ export type settingsType = {
 };
 
 export const settingsFieldsWithDividers = [
+  { formHeader: "Настройки сайта" },
   { name: "pageHeader", label: "Заголовок страницы", validation: "required" },
   { name: "metaDescription", label: "Meta описание", validation: "required" },
   { divider: true },
+  { formHeader: "Верхнее меню" },
   { name: "menuHeader", label: "Заголовок меню", validation: "required" },
   { divider: true },
+  { formHeader: "Главный блок" },
   { name: "header1", label: "Заголовок 1", validation: "required" },
   { name: "subHeader1", label: "Подзаголовок 1", validation: "required" },
   { divider: true },
+  { formHeader: "Видео" },
   { name: "headerVideo", label: "Заголовок видео", validation: "required" },
   {
     name: "subHeaderVideo",
@@ -48,6 +52,7 @@ export const settingsFieldsWithDividers = [
     validation: "required",
   },
   { divider: true },
+  { formHeader: "Блок когда необходимо" },
   {
     name: "headerWhenneeded",
     label: "Заголовок когда необходимо",
@@ -55,12 +60,14 @@ export const settingsFieldsWithDividers = [
   },
 
   { divider: true },
+  { formHeader: "Блок результаты" },
   {
     name: "resultsHeader",
     label: "Заголовок результаты",
     validation: "required",
   },
   { divider: true },
+  { formHeader: "Киноклуб" },
   {
     name: "movieclubHeader",
     label: "Заголовок киноклуба",
@@ -72,6 +79,7 @@ export const settingsFieldsWithDividers = [
     validation: "required",
   },
   { divider: true },
+  { formHeader: "Контакты" },
   {
     name: "contactsHeader",
     label: "Заголовок контактов",
@@ -86,8 +94,10 @@ export const settingsFieldsWithDividers = [
   { name: "phone", label: "Телефон", validation: "required" },
 
   { divider: true },
+  { formHeader: "Футер" },
   { name: "footerText", label: "Текст футера", validation: "required" },
   { divider: true },
+  { formHeader: "Настройки уведомлений" },
   {
     name: "notificationEmails",
     label:

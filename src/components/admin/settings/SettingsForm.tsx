@@ -24,6 +24,10 @@ export default function SettingsForm(props: settingsType) {
       {settingsFieldsWithDividers.map((field, idx) =>
         field.divider ? (
           <div className="admin-horizontal-line" key={idx}></div>
+        ) : field.formHeader ? (
+          <h4 className="text-2xl mb-4 font-bold" key={idx}>
+            {field.formHeader}:
+          </h4>
         ) : (
           <FormInput
             key={field.name}
