@@ -29,8 +29,8 @@ async function uploadFileToS3(
   const dotLastIndex = fileName.lastIndexOf(".");
   // const fileNameNoExt = fileName.substring(0, dotLastIndex);
   const fileExt = fileName.substring(dotLastIndex + 1, fileName.length);
-  const fileNameNoExt = fileName.slice(0, dotLastIndex);
-  const randomFileName = `${fileNameNoExt}-${uuidv4()}`;
+
+  const randomFileName = `${uuidv4()}`;
   const randomFileNameExt = `${randomFileName}.${fileExt}`;
 
   const params = {
