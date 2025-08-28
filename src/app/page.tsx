@@ -101,6 +101,8 @@ export default async function Home() {
       <Movieclub
         header={settings.movieclubHeader}
         text={settings.movieclubText}
+        text2={settings.movieclubText2}
+        subheader={settings.movieclubSubheader}
         imageFilename={movieclubImagesArr[0].name}
       />
       <Parallax filename={parallaxImagesArr[4].name} />

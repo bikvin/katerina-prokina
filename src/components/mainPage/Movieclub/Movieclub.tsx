@@ -8,10 +8,14 @@ import { motion } from "framer-motion";
 export default function Movieclub({
   header,
   text,
+  text2,
+  subheader,
   imageFilename,
 }: {
   header: string;
   text: string;
+  text2: string;
+  subheader: string;
   imageFilename: string;
 }) {
   return (
@@ -36,7 +40,11 @@ export default function Movieclub({
             className=" shadow-main w-full mb-10"
           />
 
-          <p className="font-light text-lg">{text}</p>
+          <p className="font-light text-lg mb-2">{text}</p>
+          <h4 className="font-bold text-slate-800 text-2xl mb-2">
+            {subheader}
+          </h4>
+          <p className="font-light text-lg">{text2}</p>
         </motion.div>
       </section>
     </div>

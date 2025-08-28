@@ -78,6 +78,16 @@ export const settingsFieldsWithDividers = [
     label: "Описание киноклуба",
     validation: "required",
   },
+  {
+    name: "movieclubSubheader",
+    label: "Подзаголовок киноклуба",
+    validation: "required",
+  },
+  {
+    name: "movieclubText2",
+    label: "Описание киноклуба 2",
+    validation: "required",
+  },
   { divider: true },
   { formHeader: "Контакты" },
   {
