@@ -9,7 +9,7 @@ export default function YandexMap() {
     >
       {/* Attribution links */}
       <a
-        href="https://yandex.com.ge/maps/213/moscow/?utm_medium=mapframe&utm_source=maps"
+        href="https://yandex.ru/maps/213/moscow/?utm_medium=mapframe&utm_source=maps"
         style={{
           color: "#eee",
           fontSize: "12px",
@@ -20,7 +20,7 @@ export default function YandexMap() {
         Москва
       </a>
       <a
-        href="https://yandex.com.ge/maps/213/moscow/house/novoslobodskaya_ulitsa_18/Z04Ycw5pSkQHQFtvfXt5c39gYA==/?indoorLevel=1&ll=37.599848%2C55.782545&utm_medium=mapframe&utm_source=maps&z=16.73"
+        href="https://yandex.ru/maps/213/moscow/house/novoslobodskaya_ulitsa_18/Z04Ycw5pSkQHQFtvfXt5c39gYA==/?indoorLevel=1&ll=37.599848%2C55.782545&utm_medium=mapframe&utm_source=maps&z=16.73"
         style={{
           color: "#eee",
           fontSize: "12px",
@@ -34,7 +34,7 @@ export default function YandexMap() {
 
       {/* Responsive iframe */}
       <iframe
-        src="https://yandex.com/map-widget/v1/?indoorLevel=1&ll=37.599848%2C55.782545&mode=whatshere&whatshere%5Bpoint%5D=37.599310%2C55.782334&whatshere%5Bzoom%5D=17&z=16.73"
+        src="https://yandex.ru/map-widget/v1/?indoorLevel=1&ll=37.599848%2C55.782545&mode=whatshere&whatshere%5Bpoint%5D=37.599310%2C55.782334&whatshere%5Bzoom%5D=17&z=16.73"
         style={{
           position: "absolute",
           top: 0,
