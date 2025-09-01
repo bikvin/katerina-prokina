@@ -12,7 +12,7 @@ export default function ContactItem({ contact }: { contact: Contact }) {
       className="relative flex flex-col border mb-4 p-4 shadow-main"
     >
       <DeleteDialog
-        contact={contact}
+        id={contact.id}
         message={`Вы уверены, что хотите удалить заявку от ${contact.name}?`}
         action={deleteContact}
       />

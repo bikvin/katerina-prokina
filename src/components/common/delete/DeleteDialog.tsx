@@ -8,18 +8,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Contact } from "@prisma/client";
 import DeleteForm from "@/components/common/delete/deleteForm";
 import { RxCross2 } from "react-icons/rx";
 import { useState } from "react";
 import { DeleteFormState } from "./deleteTypes";
 
 export default function DeleteDialog({
-  contact,
+  id,
   message,
   action,
 }: {
-  contact: Contact;
+  id: string;
   message: string;
   action: (
     _formState: DeleteFormState,
@@ -38,7 +37,7 @@ export default function DeleteDialog({
           <DialogTitle>{message}</DialogTitle>
           <DialogDescription>
             <div className="flex justify-center gap-8 mt-8">
-              <DeleteForm id={contact.id} receivedAction={action} />
+              <DeleteForm id={id} receivedAction={action} />
               <div
                 className="link-button link-button-gray"
                 onClick={() => setOpen(false)}
