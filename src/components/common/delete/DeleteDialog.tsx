@@ -30,7 +30,7 @@ export default function DeleteDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <RxCross2 className="absolute top-4 right-4 w-6 h-6 hover:text-red-700 hover:scale-125 cursor-pointer" />
+        <RxCross2 className="w-6 h-6 hover:text-red-700 hover:scale-125 cursor-pointer" />
       </DialogTrigger>
       <DialogContent className="!rounded-none">
         <DialogHeader>

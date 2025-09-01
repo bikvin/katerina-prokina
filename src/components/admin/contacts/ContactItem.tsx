@@ -11,11 +11,13 @@ export default function ContactItem({ contact }: { contact: Contact }) {
       key={contact.id}
       className="relative flex flex-col border mb-4 p-4 shadow-main"
     >
-      <DeleteDialog
-        id={contact.id}
-        message={`Вы уверены, что хотите удалить заявку от ${contact.name}?`}
-        action={deleteContact}
-      />
+      <div className="absolute top-4 right-4 ">
+        <DeleteDialog
+          id={contact.id}
+          message={`Вы уверены, что хотите удалить заявку от ${contact.name}?`}
+          action={deleteContact}
+        />
+      </div>
 
       <div>
         <span className="font-light">Имя:</span> {contact.name}
