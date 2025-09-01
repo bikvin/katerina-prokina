@@ -1,7 +1,9 @@
 import React from "react";
 
 import { Contact } from "@prisma/client";
-import DeleteContactDialog from "./DeleteContactDialog";
+// import DeleteContactDialog from "./DeleteContactDialog";
+import DeleteDialog from "@/components/common/delete/DeleteDialog";
+import { deleteContact } from "@/actions/contact/delete";
 
 export default function ContactItem({ contact }: { contact: Contact }) {
   return (
@@ -9,7 +11,11 @@ export default function ContactItem({ contact }: { contact: Contact }) {
       key={contact.id}
       className="relative flex flex-col border mb-4 p-4 shadow-main"
     >
-      <DeleteContactDialog contact={contact} />
+      <DeleteDialog
+        contact={contact}
+        message={`Вы уверены, что хотите удалить заявку от ${contact.name}?`}
+        action={deleteContact}
+      />
 
       <div>
         <span className="font-light">Имя:</span> {contact.name}

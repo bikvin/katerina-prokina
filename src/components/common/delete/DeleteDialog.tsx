@@ -9,12 +9,23 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Contact } from "@prisma/client";
-import { deleteContact } from "@/actions/contact/delete";
 import DeleteForm from "@/components/common/delete/deleteForm";
 import { RxCross2 } from "react-icons/rx";
 import { useState } from "react";
+import { DeleteFormState } from "./deleteTypes";
 
-export default function DeleteContactDialog({ contact }: { contact: Contact }) {
+export default function DeleteDialog({
+  contact,
+  message,
+  action,
+}: {
+  contact: Contact;
+  message: string;
+  action: (
+    _formState: DeleteFormState,
+    formData: FormData
+  ) => Promise<DeleteFormState>;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -24,12 +35,10 @@ export default function DeleteContactDialog({ contact }: { contact: Contact }) {
       </DialogTrigger>
       <DialogContent className="!rounded-none">
         <DialogHeader>
-          <DialogTitle>
-            {`Вы уверены, что хотите удалить заявку от ${contact.name}?`}
-          </DialogTitle>
+          <DialogTitle>{message}</DialogTitle>
           <DialogDescription>
             <div className="flex justify-center gap-8 mt-8">
-              <DeleteForm id={contact.id} receivedAction={deleteContact} />
+              <DeleteForm id={contact.id} receivedAction={action} />
               <div
                 className="link-button link-button-gray"
                 onClick={() => setOpen(false)}
