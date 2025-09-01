@@ -1,6 +1,6 @@
-import SingleWhenNeededEditCard from "./singleWhenNeededEditCard";
 // import classes from "./accordionItemsEdit.module.css";
 import { db } from "@/db";
+import WhenNeededItem from "./WhenNeededItem";
 
 export default async function WhenNeededEditList() {
   const itemsData = await db.whenNeeded.findMany({
@@ -13,12 +13,7 @@ export default async function WhenNeededEditList() {
   return (
     <div className={`mt-10`}>
       {itemsData.map((item) => (
-        <SingleWhenNeededEditCard
-          key={item.id}
-          id={item.id}
-          header={item.header}
-          text={item.text}
-        />
+        <WhenNeededItem key={item.id} whenNeeded={item} />
       ))}
     </div>
   );
