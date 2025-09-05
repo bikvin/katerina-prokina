@@ -29,7 +29,7 @@ export default function Contacts({
         transition={{ duration: 1, ease: "backInOut" }}
         viewport={{ once: true, amount: 0.4 }}
       >
-        <ContactForm />
+        {/* <ContactForm /> */}
 
         <div className="mt-20 mb-4">
           <a
