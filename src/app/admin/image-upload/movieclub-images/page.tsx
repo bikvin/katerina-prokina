@@ -5,6 +5,7 @@ import { db } from "@/db";
 
 export default async function MovieclubImagesEditPage() {
   const IMAGE_GROUP = "movieclub";
+  const SELECTED_IMAGES = 1;
 
   const MovieclubImages = await db.imageGroupArray.findUnique({
     where: { imageGroupName: IMAGE_GROUP },
@@ -23,6 +24,7 @@ export default async function MovieclubImagesEditPage() {
           <EditImagesForm
             imageData={movieclubImagesData}
             imageGroup={IMAGE_GROUP}
+            selectedImages={SELECTED_IMAGES}
           />
         </div>
       </div>

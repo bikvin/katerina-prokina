@@ -1,10 +1,10 @@
 "use client";
 import { useFormState } from "react-dom";
 import FormButton from "@/components/common/formButton";
-import { RichTextEditor } from "@/components/common/richTextEditor/RichTextEditor";
 import { useState } from "react";
 import { createArticle } from "@/actions/articles/create";
 import { editArticle } from "@/actions/articles/edit";
+import { RichTextEditorImages } from "@/components/common/richTextEditor/RichTextEditorImages";
 
 export default function CreateEditArticleForm({
   header,
@@ -43,7 +43,7 @@ export default function CreateEditArticleForm({
       <div>
         <label htmlFor="text">Текст</label>
 
-        <RichTextEditor value={editorValue} setValue={setEditorValue} />
+        <RichTextEditorImages value={editorValue} setValue={setEditorValue} />
         {formState.errors && (
           <div className="error">{formState.errors?.text?.join(", ")}</div>
         )}

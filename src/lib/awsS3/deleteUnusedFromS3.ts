@@ -1,8 +1,5 @@
-import {
-  DeleteObjectsCommand,
-  ListObjectsV2Command,
-  S3Client,
-} from "@aws-sdk/client-s3";
+import { ListObjectsV2Command, S3Client } from "@aws-sdk/client-s3";
+import { deleteFromS3 } from "./deleteFromS3";
 
 const region = process.env.NEXT_AWS_S3_REGION;
 const accessKeyId = process.env.NEXT_AWS_S3_ACCESS_KEY_ID;
@@ -61,26 +58,7 @@ export const deleteUnusedFromS3 = async (
   const deleteList = listedObjectsToDelete.map((item) => ({ Key: item.Key }));
 
   try {
-    if (deleteList.length > 0) {
-      const result = await s3Client.send(
-        new DeleteObjectsCommand({
-          Bucket: bucketName,
-          Delete: {
-            Objects: deleteList,
-          },
-        })
-      );
-
-      if (result.Deleted) {
-        console.log(
-          "Successfully deleted:",
-          result.Deleted.map((obj) => obj.Key)
-        );
-      }
-      if (result.Errors) {
-        console.error("Failed to delete:", result.Errors);
-      }
-    }
+    deleteFromS3(s3Client, deleteList);
   } catch (err) {
     console.error("Error deleting from S3:", err);
   }

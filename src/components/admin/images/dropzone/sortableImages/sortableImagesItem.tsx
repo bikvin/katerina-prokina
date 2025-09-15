@@ -35,7 +35,9 @@ export function SortableItem({
     <div
       ref={setNodeRef}
       style={style}
-      className="flex items-center justify-center relative cursor-grab w-[160px] h-[120px] border border-slate-400 rounded-lg overflow-hidden bg-slate-50"
+      className={
+        "flex items-center justify-center relative cursor-grab w-[160px] h-[120px] border border-slate-400 rounded-lg overflow-hidden bg-slate-50"
+      }
       {...attributes}
       {...listeners}
     >

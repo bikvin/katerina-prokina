@@ -30,6 +30,7 @@ export default function SortableImages({
   isDeleting,
   setIsDeleting,
   dirName,
+  selectedImages,
 }: {
   isUploadingFilesNumber: number;
   photoNames: ImageObj[];
@@ -38,6 +39,7 @@ export default function SortableImages({
   isDeleting: boolean;
   setIsDeleting: Dispatch<SetStateAction<boolean>>;
   dirName: string;
+  selectedImages: number | null;
 }) {
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -83,17 +85,36 @@ export default function SortableImages({
           Перетащите картинки в нужном порядке. Потом не забудьте нажать
           Сохранить.
         </div>
-        <div className="flex justify-start gap-5 flex-wrap p-5 pt-3 ">
-          {photoNames.map((photoName) => (
-            <SortableItem
-              key={photoName.id}
-              id={photoName.id}
-              name={photoName.name}
-              deleteFile={deleteFile}
-              disabled={false}
-              dirName={dirName}
-            />
-          ))}
+        <div className="flex justify-start gap-0 flex-wrap p-5 pt-3 ">
+          {photoNames.map((photoName, index) => {
+            const highlighted = selectedImages ? index < selectedImages : false;
+            return (
+              <div
+                key={photoName.id}
+                className={`
+          relative w-[200px] h-[160px] flex items-center justify-center
+          ${highlighted ? "bg-orange-100 border-0 border-yellow-200" : ""}
+        `}
+              >
+                <SortableItem
+                  id={photoName.id}
+                  name={photoName.name}
+                  deleteFile={deleteFile}
+                  disabled={false}
+                  dirName={dirName}
+                />
+              </div>
+              // <SortableItem
+              //   key={photoName.id}
+              //   id={photoName.id}
+              //   name={photoName.name}
+              //   deleteFile={deleteFile}
+              //   disabled={false}
+              //   dirName={dirName}
+              //   selected={selectedImages ? index < selectedImages : false}
+              // />
+            );
+          })}
 
           {!!isUploadingFilesNumber &&
             Array.from({ length: isUploadingFilesNumber }).map((_, i) => (

@@ -5,6 +5,7 @@ import { db } from "@/db";
 
 export default async function ParallaxImagesEditPage() {
   const IMAGE_GROUP = "parallax";
+  const SELECTED_IMAGES = 5;
 
   const parallaxImages = await db.imageGroupArray.findUnique({
     where: { imageGroupName: IMAGE_GROUP },
@@ -23,6 +24,7 @@ export default async function ParallaxImagesEditPage() {
           <EditImagesForm
             imageData={parallaxImagesData}
             imageGroup={IMAGE_GROUP}
+            selectedImages={SELECTED_IMAGES}
           />
         </div>
       </div>

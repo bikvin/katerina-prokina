@@ -10,6 +10,8 @@ export default async function AvatarImagesEditPage() {
     where: { imageGroupName: IMAGE_GROUP },
   });
 
+  const SELECTED_IMAGES = 1;
+
   const arrString = avatarImages ? avatarImages.fileNamesArr : "[]";
 
   const avatarImagesData = JSON.parse(arrString);
@@ -23,6 +25,7 @@ export default async function AvatarImagesEditPage() {
           <EditImagesForm
             imageData={avatarImagesData}
             imageGroup={IMAGE_GROUP}
+            selectedImages={SELECTED_IMAGES}
           />
         </div>
       </div>

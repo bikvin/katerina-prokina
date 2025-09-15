@@ -8,7 +8,10 @@ import Link from "next/link";
 
 export default function ArticlesItem({ article }: { article: Article }) {
   const textObj = {
-    __html: DOMPurify.sanitize(article.htmlText.substring(0, 200)) + "...",
+    __html:
+      DOMPurify.sanitize(
+        article.htmlText.replace(/<img[^>]*>/g, "").substring(0, 200)
+      ) + "...",
   };
 
   return (

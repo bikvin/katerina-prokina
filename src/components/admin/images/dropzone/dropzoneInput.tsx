@@ -15,10 +15,12 @@ function DropzoneInput({
   photoNames,
   setPhotoNames,
   dirName,
+  selectedImages,
 }: {
   photoNames: ImageObj[];
   setPhotoNames: React.Dispatch<React.SetStateAction<ImageObj[]>>;
   dirName: string;
+  selectedImages: number | null;
 }) {
   const [isUploadingFilesNumber, setIsUploadingFilesNumber] = useState(0);
 
@@ -182,6 +184,7 @@ function DropzoneInput({
           isDeleting={isDeleting}
           setIsDeleting={setIsDeleting}
           dirName={dirName}
+          selectedImages={selectedImages}
         />
       </div>
     </section>

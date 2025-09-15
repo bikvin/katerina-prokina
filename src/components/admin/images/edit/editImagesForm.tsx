@@ -11,9 +11,11 @@ import { ImageObj } from "./ImageObjInterface";
 export function EditImagesForm({
   imageData,
   imageGroup,
+  selectedImages = null,
 }: {
   imageData: ImageObj[];
   imageGroup: string;
+  selectedImages?: number | null;
 }) {
   const [formState, action] = useFormState(EditImagesAction, {
     errors: {},
@@ -30,6 +32,7 @@ export function EditImagesForm({
           photoNames={photoNames}
           setPhotoNames={setPhotoNames}
           dirName={`${imageGroup}-images`}
+          selectedImages={selectedImages}
         />
       </div>
 

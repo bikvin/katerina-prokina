@@ -72,8 +72,9 @@ export async function POST(request: Request) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const fileName = await uploadFileToS3(buffer, file.name, directory);
+    const url = `${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_PROTOCOL}://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_LINK}/${directory}/${fileName}`;
 
-    return NextResponse.json({ success: true, fileName });
+    return NextResponse.json({ success: true, fileName, url });
   } catch (error) {
     return NextResponse.json({ error });
   }

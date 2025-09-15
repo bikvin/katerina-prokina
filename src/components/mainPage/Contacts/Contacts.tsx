@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import ContactForm from "../ContactForm/ContactForm";
+// import ContactForm from "../ContactForm/ContactForm";
 import YandexMap from "./YandexMap";
 
 export default function Contacts({
