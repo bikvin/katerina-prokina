@@ -3,66 +3,49 @@
 import { useDropzone } from "react-dropzone";
 import { useCallback, useState } from "react";
 
-import SortableImages from "@/components/admin/images/dropzone/sortableImages/sortableImages";
 import { v4 as uuidv4 } from "uuid";
 import { ImageObj } from "../edit/ImageObjInterface";
 import { loadToS3 } from "@/lib/awsS3/loadToS3";
 import clsx from "clsx";
+import { SortableItem } from "./sortableImages/sortableImagesItem";
+import { BiLoaderAlt } from "react-icons/bi";
 
-// const DIR_NAME = "parallax-images";
-
-function DropzoneInput({
-  photoNames,
-  setPhotoNames,
+export default function DropzoneInputSingleImage({
+  photoName,
+  setPhotoName,
   dirName,
-  selectedImages,
 }: {
-  photoNames: ImageObj[];
-  setPhotoNames: React.Dispatch<React.SetStateAction<ImageObj[]>>;
+  photoName: ImageObj | null;
+  setPhotoName: React.Dispatch<React.SetStateAction<ImageObj | null>>;
   dirName: string;
-  selectedImages: number | null;
 }) {
-  const [isUploadingFilesNumber, setIsUploadingFilesNumber] = useState(0);
-
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   const [customRejections, setCustomRejections] = useState<
     { file: File; errors: { code: string; message: string }[] }[]
   >([]);
 
   const addNewFile = (fileName: string) => {
-    setPhotoNames((prevPhotoNames) => [
-      ...prevPhotoNames,
-      {
-        name: fileName,
-        id: uuidv4(),
-      },
-    ]);
-  };
-
-  const changeOrder = (newArr: ImageObj[]) => {
-    setPhotoNames(newArr);
-  };
-
-  const deleteFile = (id: string) => {
-    setIsDeleting(true);
-
-    setPhotoNames((prevPhotoNames) => {
-      const newPhotoNames = prevPhotoNames.filter(
-        (photoName) => photoName.id !== id
-      );
-
-      return newPhotoNames;
+    setPhotoName({
+      name: fileName,
+      id: uuidv4(),
     });
+  };
+
+  const deleteFile = () => {
+    console.log("deleting");
+    // setIsDeleting(true);
+
+    setPhotoName(null);
   };
 
   const onDrop = useCallback((autoAcceptedFiles: File[]) => {
     console.log("OnDrop");
-    console.log("autoAcceptedFiles", autoAcceptedFiles);
+
+    const newCustomRejections: typeof customRejections = [];
 
     if (autoAcceptedFiles.length == 0) return;
 
-    const newCustomRejections: typeof customRejections = [];
     const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
 
     autoAcceptedFiles.forEach((file) => {
@@ -81,9 +64,7 @@ function DropzoneInput({
       (file) => allowedTypes.includes(file.type) // only allowed types
     );
 
-    // console.log("acceptedFiles", acceptedFiles);
-
-    setIsUploadingFilesNumber(filteredAccepted.length);
+    setIsUploading(true);
     filteredAccepted.forEach((file) => {
       const reader = new FileReader();
 
@@ -94,15 +75,16 @@ function DropzoneInput({
         try {
           data = await loadToS3(file, dirName);
         } catch (error) {
-          console.log(error);
-          setIsUploadingFilesNumber(0);
+          console.error("Upload failed:", error);
+        } finally {
+          setIsUploading(false);
         }
 
         // console.log("data", data);
 
         addNewFile(data.fileName);
 
-        setIsUploadingFilesNumber(0);
+        setIsUploading(false);
       };
       reader.readAsArrayBuffer(file);
     });
@@ -119,13 +101,7 @@ function DropzoneInput({
     isDragReject,
   } = useDropzone({
     onDrop,
-    // accept: {
-    //   "image/jpeg": [],
-    //   "image/jpg": [],
-    //   "image/pjpeg": [],
-    //   "image/png": [],
-    //   "image/webp": [],
-    // },
+    maxFiles: 1,
     maxSize: 1024 * 1024, // 1 MB in bytes
   });
 
@@ -138,20 +114,15 @@ function DropzoneInput({
 
   // console.log("dropZone");
   return (
-    <section className="container">
+    <div>
       <div
         {...getRootProps({
           className: classes,
         })}
       >
-        {/* <input {...getInputProps()} /> */}
+        <input {...getInputProps()} />
         <p>Выберите файл или перетащите сюда.</p>
       </div>
-      <input
-        {...getInputProps({
-          onClick: () => console.log("file input clicked"),
-        })}
-      />
 
       <ul>
         {[...fileRejections, ...customRejections].map((rejection, index) => (
@@ -167,6 +138,7 @@ function DropzoneInput({
                   );
                 case "file-invalid-type":
                   return <span key={e.code}>Неверный формат файла</span>;
+
                 default:
                   return <span key={e.code}>{e.message}</span>;
               }
@@ -175,20 +147,28 @@ function DropzoneInput({
         ))}
       </ul>
 
-      <div>
-        <SortableImages
-          isUploadingFilesNumber={isUploadingFilesNumber}
-          photoNames={photoNames}
-          changeOrder={changeOrder}
-          deleteFile={deleteFile}
-          isDeleting={isDeleting}
-          setIsDeleting={setIsDeleting}
-          dirName={dirName}
-          selectedImages={selectedImages}
-        />
+      <div
+        className={clsx(
+          "flex justify-center gap-0 flex-wrap",
+          (photoName || isUploading) && "p-5 pt-3"
+        )}
+      >
+        {photoName && !isUploading && (
+          <SortableItem
+            id={photoName.id}
+            name={photoName.name}
+            deleteFile={deleteFile}
+            disabled={false}
+            dirName={dirName}
+          />
+        )}
+
+        {isUploading && (
+          <div className="flex items-center justify-center relative cursor-grab w-[160px] h-[120px] border border-slate-400 rounded-lg overflow-hidden bg-slate-50">
+            <BiLoaderAlt className="inline-block h-8 w-8 animate-spin" />
+          </div>
+        )}
       </div>
-    </section>
+    </div>
   );
 }
-
-export default DropzoneInput;

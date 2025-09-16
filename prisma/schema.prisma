@@ -85,10 +85,11 @@ model ImageGroupArray {
 }
 
 model Article {
-  id        String   @id @default(cuid())
-  header    String
-  htmlText  String
-  order     Int?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String   @id @default(cuid())
+  header         String
+  coverPhotoName String // for single cover photo
+  htmlText       String
+  order          Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }

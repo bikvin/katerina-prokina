@@ -5,17 +5,19 @@ import FormButton from "@/components/common/formButton";
 import { useState } from "react";
 // import { EditParallaxImages } from "@/actions/parallax-images/edit/editParallaxImages";
 import { EditImagesAction } from "@/actions/images/edit/editImagesAction";
-import DropzoneInput from "@/components/admin/images/dropzone/dropzoneInput";
+import DropzoneInputMultipleImages from "@/components/admin/images/dropzone/dropzoneInputMultipleImages";
 import { ImageObj } from "./ImageObjInterface";
 
 export function EditImagesForm({
   imageData,
   imageGroup,
   selectedImages = null,
+  maxImages = null,
 }: {
   imageData: ImageObj[];
   imageGroup: string;
   selectedImages?: number | null;
+  maxImages?: number | null;
 }) {
   const [formState, action] = useFormState(EditImagesAction, {
     errors: {},
@@ -28,11 +30,12 @@ export function EditImagesForm({
   return (
     <form className={`adminForm mb-10`} action={action}>
       <div>
-        <DropzoneInput
+        <DropzoneInputMultipleImages
           photoNames={photoNames}
           setPhotoNames={setPhotoNames}
           dirName={`${imageGroup}-images`}
           selectedImages={selectedImages}
+          maxImages={maxImages}
         />
       </div>
 

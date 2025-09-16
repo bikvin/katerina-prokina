@@ -9,6 +9,7 @@ import { editArticleSchema } from "@/zod/article";
 interface EditArticleState {
   errors: {
     header?: string[];
+    coverPhotoName?: string[];
     text?: string[];
     id?: string[];
     order?: string[];
@@ -28,6 +29,7 @@ export async function editArticle(
   const result = editArticleSchema.safeParse({
     id: formData.get("id"),
     header: formData.get("header"),
+    coverPhotoName: formData.get("coverPhotoName"),
     text: formData.get("text"),
     order: parsedOrder,
   });
@@ -49,6 +51,7 @@ export async function editArticle(
       },
       data: {
         header: result.data.header,
+        coverPhotoName: result.data.coverPhotoName,
         htmlText: result.data.text,
         order: parsedOrder,
       },

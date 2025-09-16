@@ -7,6 +7,7 @@ export default async function EditArticlePage({
 }: {
   params: { itemId: string };
 }) {
+  const IMAGE_GROUP = "articles";
   const itemId = params.itemId;
 
   const item = await db.article.findUnique({ where: { id: itemId } });
@@ -14,6 +15,10 @@ export default async function EditArticlePage({
   if (!item) {
     throw new Error("Item not found");
   }
+
+  const coverImageData = JSON.parse(item.coverPhotoName) || null;
+
+  console.log("IMAGE_GROUP", IMAGE_GROUP);
 
   return (
     <>
@@ -23,10 +28,12 @@ export default async function EditArticlePage({
           <h2 className="mt-10 admin-form-header">Редактировать статью</h2>
           <CreateEditArticleForm
             header={item.header}
+            imageData={coverImageData}
             htmlText={item.htmlText}
             id={item.id}
             order={item.order}
             isEdit={true}
+            imageGroup={IMAGE_GROUP}
           />
         </div>
       </div>

@@ -5,6 +5,7 @@ import DeleteDialog from "@/components/common/delete/DeleteDialog";
 import { deleteArticle } from "@/actions/articles/delete";
 import { RiEdit2Line } from "react-icons/ri";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ArticlesItem({ article }: { article: Article }) {
   const textObj = {
@@ -13,6 +14,12 @@ export default function ArticlesItem({ article }: { article: Article }) {
         article.htmlText.replace(/<img[^>]*>/g, "").substring(0, 200)
       ) + "...",
   };
+
+  const fileName = JSON.parse(article.coverPhotoName).name || "";
+  const imageLink = `${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_PROTOCOL}://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_LINK}/articles-images/${fileName}`;
+
+  console.log("fileName", fileName);
+  console.log("imageLink", imageLink);
 
   return (
     <div
@@ -30,13 +37,18 @@ export default function ArticlesItem({ article }: { article: Article }) {
         </Link>
       </div>
 
-      <div className="p-4">
-        <h4 className="gray-subheader mb-4">{article.header}</h4>
+      <div className="flex flex-col md:flex-row justify-start items-center">
+        <div>
+          <Image src={imageLink} alt="article image" width={160} height={120} />
+        </div>
+        <div className="p-4">
+          <h4 className="gray-subheader mb-4">{article.header}</h4>
 
-        <div
-          dangerouslySetInnerHTML={textObj}
-          className="max-h-30 overflow-hidden"
-        ></div>
+          <div
+            dangerouslySetInnerHTML={textObj}
+            className="max-h-30 overflow-hidden"
+          ></div>
+        </div>
       </div>
 
       <div className="self-end font-light text-sm">

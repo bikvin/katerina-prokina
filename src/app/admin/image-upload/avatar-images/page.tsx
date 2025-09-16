@@ -11,6 +11,7 @@ export default async function AvatarImagesEditPage() {
   });
 
   const SELECTED_IMAGES = 1;
+  const MAX_IMAGES = 1;
 
   const arrString = avatarImages ? avatarImages.fileNamesArr : "[]";
 
@@ -26,6 +27,7 @@ export default async function AvatarImagesEditPage() {
             imageData={avatarImagesData}
             imageGroup={IMAGE_GROUP}
             selectedImages={SELECTED_IMAGES}
+            maxImages={MAX_IMAGES}
           />
         </div>
       </div>

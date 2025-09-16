@@ -104,15 +104,6 @@ export default function SortableImages({
                   dirName={dirName}
                 />
               </div>
-              // <SortableItem
-              //   key={photoName.id}
-              //   id={photoName.id}
-              //   name={photoName.name}
-              //   deleteFile={deleteFile}
-              //   disabled={false}
-              //   dirName={dirName}
-              //   selected={selectedImages ? index < selectedImages : false}
-              // />
             );
           })}
 
