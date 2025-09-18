@@ -19,7 +19,7 @@ export default function DarkRedButton({
     <div className="">
       <Link
         href={href}
-        className={`bg-gradient-to-r from-darkRed1 to-darkRed2 hover:bg-gradient-to-l  border-0  text-white cursor-pointer text-center block  ${sizeClass}`}
+        className={`bg-gradient-to-r from-darkRed1 to-darkRed2 hover:bg-gradient-to-l  border-0  text-white cursor-pointer text-center block  ${sizeClass} min-w-40`}
       >
         {children}
       </Link>

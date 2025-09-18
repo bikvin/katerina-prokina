@@ -45,6 +45,7 @@ export default function Header({ menuHeader }: { menuHeader: string }) {
     { href: "#about", label: "Обо мне" },
     { href: "#when-needed", label: "Когда необходимо" },
     { href: "#results", label: "Результаты" },
+    { href: "/articles", label: "Cтатьи" },
     { href: "#movieclub", label: "Киноклуб" },
     { href: "#contacts", label: "Контакты" },
   ];
@@ -52,7 +53,9 @@ export default function Header({ menuHeader }: { menuHeader: string }) {
   return (
     <header className="font-jost text-white bg-gradient-to-r from-darkRed1 to-darkRed2  px-8">
       <div className="flex flex-col md:flex-row justify-between max-w-screen-lg mx-auto">
-        <h3 className=" md:text-lg  tracking-widest my-4">{menuHeader}</h3>
+        <Link href="/">
+          <h3 className=" md:text-lg  tracking-widest my-4">{menuHeader}</h3>
+        </Link>
         <RxHamburgerMenu
           onClick={clickHandler}
           className="absolute top-4 right-4 w-8 h-8 md:hidden"

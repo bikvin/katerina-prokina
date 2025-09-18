@@ -73,7 +73,8 @@ export async function editArticle(
   }
 
   revalidatePath("/admin/articles");
-  revalidatePath("/");
+  revalidatePath("/articles");
+  revalidatePath(`/articles/${result.data.id}`);
 
   redirect("/admin/articles");
 }

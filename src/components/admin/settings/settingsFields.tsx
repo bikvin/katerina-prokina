@@ -120,6 +120,13 @@ export const settingsFieldsWithDividers = [
       "Аккаунты telegram, которые могут получать уведомления. Через зяпятую. После добавления сюда нужно с этого аккаунта зайти в бот katerina_prokina_bot и нажать start",
     validation: "optional",
   },
+  { divider: true },
+  { formHeader: "Статьи" },
+  {
+    name: "articlesPageHeader",
+    label: "Заголовок страницы статей",
+    validation: "required",
+  },
 ];
 
 export const settingsFields: (keyof settingsType)[] = settingsFieldsWithDividers

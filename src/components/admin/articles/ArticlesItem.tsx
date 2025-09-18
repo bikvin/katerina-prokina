@@ -18,9 +18,6 @@ export default function ArticlesItem({ article }: { article: Article }) {
   const fileName = JSON.parse(article.coverPhotoName).name || "";
   const imageLink = `${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_PROTOCOL}://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_LINK}/articles-images/${fileName}`;
 
-  console.log("fileName", fileName);
-  console.log("imageLink", imageLink);
-
   return (
     <div
       key={article.id}
@@ -38,8 +35,13 @@ export default function ArticlesItem({ article }: { article: Article }) {
       </div>
 
       <div className="flex flex-col md:flex-row justify-start items-center">
-        <div>
-          <Image src={imageLink} alt="article image" width={160} height={120} />
+        <div className="relative aspect-[calc(3/2)] min-w-[calc(20%)] ">
+          <Image
+            src={imageLink}
+            alt="article image"
+            fill
+            className="object-cover"
+          />
         </div>
         <div className="p-4">
           <h4 className="gray-subheader mb-4">{article.header}</h4>

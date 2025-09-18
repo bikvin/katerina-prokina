@@ -63,7 +63,7 @@ export async function createArticle(
   }
 
   revalidatePath("/admin/articles");
-  revalidatePath("/");
+  revalidatePath("/articles");
 
   redirect("/admin/articles");
 }

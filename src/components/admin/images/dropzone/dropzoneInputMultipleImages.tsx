@@ -28,8 +28,6 @@ export default function DropzoneInputMultipleImages({
 
   const [isDeleting, setIsDeleting] = useState(false);
 
-  console.log("photoNames render", photoNames);
-
   const [customRejections, setCustomRejections] = useState<
     { file: File; errors: { code: string; message: string }[] }[]
   >([]);
@@ -59,15 +57,11 @@ export default function DropzoneInputMultipleImages({
       console.log("newPhotoNames", newPhotoNames);
       return newPhotoNames;
     });
-
-    console.log("photoNames", photoNames);
   };
 
   const onDrop = useCallback(
     (autoAcceptedFiles: File[]) => {
-      console.log("OnDrop");
-
-      console.log("photoNames", photoNames);
+      // console.log("OnDrop");
 
       const newCustomRejections: typeof customRejections = [];
 

@@ -46,7 +46,7 @@ export async function deleteArticle(
   }
 
   revalidatePath("/admin/articles");
-  revalidatePath("/");
+  revalidatePath("/articles");
 
   redirect("/admin/articles");
 }

@@ -62,6 +62,11 @@ const topMenuList: TopMenuItem[] = [
         name: "Киноклуб",
         link: "/admin/image-upload/movieclub-images",
       },
+      {
+        type: "link",
+        name: "Страница статьи",
+        link: "/admin/image-upload/articleshero-images",
+      },
     ],
   },
   {
