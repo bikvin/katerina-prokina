@@ -10,12 +10,15 @@ import Parallax from "@/components/mainPage/Parallax/Parallax";
 import WhenNeededServer from "@/components/mainPage/WhenNeeded/WhenNeededServer";
 import Results from "@/components/mainPage/Results/Results";
 import Movieclub from "@/components/mainPage/Movieclub/Movieclub";
+import ForClients from "@/components/mainPage/ForClients/ForClients";
+import { EditableSection } from "@prisma/client";
 
 export default async function Home() {
   let settings;
   let parallaxImagesArr;
   let avatarImagesArr;
   let movieclubImagesArr;
+  let forclients: EditableSection;
 
   try {
     const [
@@ -23,6 +26,7 @@ export default async function Home() {
       parallaxImagesData,
       avatarImagesData,
       movieclubImagesData,
+      forclientsData,
     ] = await Promise.all([
       db.settings.findMany({
         where: {
@@ -43,13 +47,16 @@ export default async function Home() {
       db.imageGroupArray.findUnique({
         where: { imageGroupName: "movieclub" },
       }),
+
+      db.editableSection.findUnique({ where: { key: "forclients" } }),
     ]);
 
     if (
       !settingsData ||
       !parallaxImagesData ||
       !avatarImagesData ||
-      !movieclubImagesData
+      !movieclubImagesData ||
+      !forclientsData
     ) {
       return <div className="text-red-800">Данные не найдены.</div>;
     }
@@ -64,6 +71,7 @@ export default async function Home() {
     parallaxImagesArr = JSON.parse(parallaxImagesData.fileNamesArr);
     avatarImagesArr = JSON.parse(avatarImagesData.fileNamesArr);
     movieclubImagesArr = JSON.parse(movieclubImagesData.fileNamesArr);
+    forclients = forclientsData;
   } catch (err) {
     console.log(err);
     return <div className="text-red-800">Ошибка при загрузке данных.</div>;
@@ -96,7 +104,10 @@ export default async function Home() {
       <Parallax filename={parallaxImagesArr[2].name} />
 
       <Results header={settings.resultsHeader} />
+
       <Parallax filename={parallaxImagesArr[3].name} />
+      <ForClients header={forclients.header} htmlText={forclients.htmlText} />
+      <Parallax filename={parallaxImagesArr[4].name} />
 
       <Movieclub
         header={settings.movieclubHeader}
@@ -105,7 +116,7 @@ export default async function Home() {
         subheader={settings.movieclubSubheader}
         imageFilename={movieclubImagesArr[0].name}
       />
-      <Parallax filename={parallaxImagesArr[4].name} />
+      <Parallax filename={parallaxImagesArr[5].name} />
 
       <Contacts
         header={settings.contactsHeader}

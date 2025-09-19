@@ -65,7 +65,11 @@ export default function CreateEditArticleForm({
       <div>
         <label htmlFor="text">Текст</label>
 
-        <RichTextEditorImages value={editorValue} setValue={setEditorValue} />
+        <RichTextEditorImages
+          value={editorValue}
+          setValue={setEditorValue}
+          imageGroup={imageGroup}
+        />
         {formState.errors && (
           <div className="error">{formState.errors?.text?.join(", ")}</div>
         )}

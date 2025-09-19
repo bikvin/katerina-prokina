@@ -8,9 +8,11 @@ import { loadToS3 } from "@/lib/awsS3/loadToS3";
 export const RichTextEditorImages = ({
   value,
   setValue,
+  imageGroup,
 }: {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  imageGroup: string;
 }) => {
   const ReactQuill = useMemo(
     () => dynamic(() => import("react-quill"), { ssr: false }),
@@ -50,7 +52,7 @@ export const RichTextEditorImages = ({
               }
 
               try {
-                const data = await loadToS3(file, "article-images");
+                const data = await loadToS3(file, `${imageGroup}-images`);
                 const range = this.quill.getSelection();
                 const pos = range ? range.index : this.quill.getLength();
                 this.quill.insertEmbed(pos, "image", data.url);

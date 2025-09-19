@@ -35,6 +35,11 @@ const topMenuList: TopMenuItem[] = [
   },
   {
     type: "link",
+    name: "Клиентам",
+    link: "/admin/forclients",
+  },
+  {
+    type: "link",
     name: "Когда нужна терапия",
     link: "/admin/when-needed",
   },

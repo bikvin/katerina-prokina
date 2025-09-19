@@ -93,3 +93,11 @@ model Article {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
+
+model EditableSection {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique // e.g. "about", "hero", "footer"
+  header    String
+  htmlText  String
+  updatedAt DateTime @updatedAt
+}
