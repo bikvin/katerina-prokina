@@ -44,10 +44,10 @@ export default function Header({ menuHeader }: { menuHeader: string }) {
   const menuItems = [
     { href: "/#about", label: "Обо мне" },
     { href: "/#when-needed", label: "Когда необходимо" },
-    { href: "/#results", label: "Результаты" },
+    // { href: "/#results", label: "Результаты" },
     { href: "/#forclients", label: "Клиентам" },
     { href: "/articles", label: "Cтатьи" },
-    { href: "/#movieclub", label: "Киноклуб" },
+    // { href: "/#movieclub", label: "Киноклуб" },
     { href: "/#contacts", label: "Контакты" },
   ];
 
