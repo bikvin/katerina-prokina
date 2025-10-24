@@ -2,12 +2,14 @@
 import React from "react";
 import Image from "next/image";
 
-export function ArticleHero({
+export function SecondaryPageHero({
   header,
   imageFilename,
+  imageGroupName,
 }: {
   header: string;
   imageFilename: string;
+  imageGroupName: string;
 }) {
   return (
     <>
@@ -16,7 +18,9 @@ export function ArticleHero({
           {header}
         </h1>
         <Image
-          src={`${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_PROTOCOL}://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_LINK}/article-hero-images/${imageFilename}`}
+          src={`${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_PROTOCOL}://${
+            process.env.NEXT_PUBLIC_AWS_S3_BUCKET_LINK
+          }/${imageGroupName + "-images"}/${imageFilename}`}
           fill
           alt={header}
           className="object-cover"

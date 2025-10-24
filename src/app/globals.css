@@ -84,10 +84,23 @@
     vertical-align: middle;
   }
 
-  /* .when-list > ul {
-    padding-left: 20px;
-    list-style: square;
-  } */
+  .for-clients ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em; /* adjust vertically to align bullet with first line */
+    background-image: url("/img/icons/square2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 0.5em;
+    height: 0.5em;
+  }
+
+  .for-clients ul > li {
+    position: relative;
+    padding-left: 1em; /* space for bullet */
+    margin-bottom: 16px;
+  }
 
   .accordion-content-lists a {
     @apply text-sky-600 underline;

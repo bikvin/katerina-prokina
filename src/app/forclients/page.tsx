@@ -3,17 +3,19 @@ import Header from "@/components/mainPage/Header/Header";
 
 import { db } from "@/db";
 import { settingsFields } from "@/components/admin/settings/settingsFields";
-import ArticleList from "@/components/articles/articlesPage/ArticleList/ArticleList";
 import { SecondaryPageHero } from "@/components/common/SecondaryPageHero/SecondaryPageHero";
+import { EditableSection } from "@prisma/client";
+import { ForCLientsContent } from "@/components/mainPage/ForClients/ForClientsContent";
 
-export default async function Articles() {
+export default async function ForClients() {
   let settings;
-  let articlesheroImagesArr;
-  let articles;
-  const imageGroupName = "article-hero";
+  let forclientsImagesArr;
+
+  const imageGroupName = "forclients-hero";
+  let forclients: EditableSection;
 
   try {
-    const [settingsData, articlesheroImagesData, articleData] =
+    const [settingsData, forclientsImagesData, forclientsData] =
       await Promise.all([
         db.settings.findMany({
           where: {
@@ -27,15 +29,10 @@ export default async function Articles() {
           where: { imageGroupName },
         }),
 
-        await db.article.findMany({
-          orderBy: [
-            { order: "asc" }, // Primary sort by 'order' column
-            { createdAt: "desc" }, // Secondary sort by 'createdAt' column
-          ],
-        }),
+        db.editableSection.findUnique({ where: { key: "forclients" } }),
       ]);
 
-    if (!settingsData || !articlesheroImagesData || !articleData) {
+    if (!settingsData || !forclientsImagesData || !forclientsData) {
       return <div className="text-red-800">Данные не найдены.</div>;
     }
 
@@ -46,9 +43,9 @@ export default async function Articles() {
       ])
     );
 
-    articlesheroImagesArr = JSON.parse(articlesheroImagesData.fileNamesArr);
+    forclientsImagesArr = JSON.parse(forclientsImagesData.fileNamesArr);
 
-    articles = articleData;
+    forclients = forclientsData;
   } catch (err) {
     console.log(err);
     return <div className="text-red-800">Ошибка при загрузке данных.</div>;
@@ -58,11 +55,15 @@ export default async function Articles() {
     <>
       <Header menuHeader={settings.menuHeader} />
       <SecondaryPageHero
-        header={settings.articlesPageHeader}
-        imageFilename={articlesheroImagesArr[0].name}
+        header={"Клиентам"}
+        imageFilename={forclientsImagesArr[0].name}
         imageGroupName={imageGroupName}
       />
-      <ArticleList articleData={articles} />
+      <ForCLientsContent
+        header={forclients.header}
+        htmlText={forclients.htmlText}
+      />
+      {/* <ArticleList articleData={articles} /> */}
       <Footer footerText={settings.footerText} />
     </>
   );

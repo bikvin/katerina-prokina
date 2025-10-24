@@ -69,8 +69,13 @@ const topMenuList: TopMenuItem[] = [
       },
       {
         type: "link",
-        name: "Страница статьи",
+        name: "Страница Статьи",
         link: "/admin/image-upload/articleshero-images",
+      },
+      {
+        type: "link",
+        name: "Страница Клиентам",
+        link: "/admin/image-upload/forclients-images",
       },
     ],
   },
