@@ -6,6 +6,7 @@ import { settingsFields } from "@/components/admin/settings/settingsFields";
 import ArticleList from "@/components/articles/articlesPage/ArticleList/ArticleList";
 import { SecondaryPageHero } from "@/components/common/SecondaryPageHero/SecondaryPageHero";
 import { ArticleTypeEnum } from "@prisma/client";
+import TelegramWhatsapp from "@/components/mainPage/Contacts/TelegramWhatsapp";
 
 export default async function Articles() {
   let settings;
@@ -90,6 +91,10 @@ export default async function Articles() {
         articleData={movieReviews}
         header={settings.articlesPageSubheaderMovieReviews}
       />
+      <section className="pb-16 md:pb-20 md:pt-10 px-8 md:px-10  overflow-x-hidden max-w-screen-lg mx-auto flex flex-col">
+        <TelegramWhatsapp telegram={settings.telegram} phone={settings.phone} />
+      </section>
+
       <Footer footerText={settings.footerText} />
     </>
   );

@@ -21,6 +21,7 @@ export type settingsType = {
   articlesPageHeader: string;
   articlesPageSubheaderArticles: string;
   articlesPageSubheaderMovieReviews: string;
+  forclientsPageHeader: string;
 };
 
 export const settingsFieldsWithDividers = [
@@ -138,6 +139,13 @@ export const settingsFieldsWithDividers = [
   {
     name: "articlesPageSubheaderMovieReviews",
     label: "Подзаголовок обзоры фильмов",
+    validation: "required",
+  },
+  { divider: true },
+  { formHeader: "Клиентам" },
+  {
+    name: "forclientsPageHeader",
+    label: "Заголовок страницы клиентам",
     validation: "required",
   },
 ];

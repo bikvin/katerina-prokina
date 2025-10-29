@@ -6,6 +6,7 @@ import { settingsFields } from "@/components/admin/settings/settingsFields";
 import { SecondaryPageHero } from "@/components/common/SecondaryPageHero/SecondaryPageHero";
 import { EditableSection } from "@prisma/client";
 import { ForCLientsContent } from "@/components/mainPage/ForClients/ForClientsContent";
+import TelegramWhatsapp from "@/components/mainPage/Contacts/TelegramWhatsapp";
 
 export default async function ForClients() {
   let settings;
@@ -64,6 +65,9 @@ export default async function ForClients() {
         htmlText={forclients.htmlText}
       />
       {/* <ArticleList articleData={articles} /> */}
+      <section className="pb-16 md:pb-20 md:pt-10 px-8 md:px-10  overflow-x-hidden max-w-screen-lg mx-auto flex flex-col">
+        <TelegramWhatsapp telegram={settings.telegram} phone={settings.phone} />
+      </section>
       <Footer footerText={settings.footerText} />
     </>
   );
