@@ -56,7 +56,7 @@ export default async function ForClients() {
     <>
       <Header menuHeader={settings.menuHeader} />
       <SecondaryPageHero
-        header={"Клиентам"}
+        header={settings.forclientsPageHeader}
         imageFilename={forclientsImagesArr[0].name}
         imageGroupName={imageGroupName}
       />
