@@ -1,3 +1,4 @@
+import { ArticleTypeEnum } from "@prisma/client";
 import { z } from "zod";
 
 export const createArticleSchema = z.object({
@@ -6,6 +7,9 @@ export const createArticleSchema = z.object({
     .string()
     .min(1, { message: "Нужно изображение для обложки" }),
   text: z.string().min(1, { message: "Содержание не может быть пустым" }),
+  type: z.nativeEnum(ArticleTypeEnum, {
+    required_error: "Выберите тип статьи",
+  }),
   order: z.number().optional(), // Makes 'order' optional
 });
 
@@ -15,6 +19,9 @@ export const editArticleSchema = z.object({
     .string()
     .min(1, { message: "Нужно изображение для обложки" }),
   text: z.string().min(1, { message: "Содержание не может быть пустым" }),
+  type: z.nativeEnum(ArticleTypeEnum, {
+    required_error: "Выберите тип статьи",
+  }),
   order: z.number().optional(), // Makes 'order' optional
   id: z.string().cuid({ message: "Неверный id статьи" }),
 });

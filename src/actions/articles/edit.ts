@@ -10,6 +10,7 @@ interface EditArticleState {
   errors: {
     header?: string[];
     coverPhotoName?: string[];
+    type?: string[];
     text?: string[];
     id?: string[];
     order?: string[];
@@ -23,26 +24,28 @@ export async function editArticle(
 ): Promise<EditArticleState> {
   // console.log("formData ", formData);
 
-  const order = formData.get("order");
-  const parsedOrder = order ? Number(order) : undefined;
+  const id = formData.get("id")?.toString() ?? "";
+  const header = formData.get("header")?.toString() ?? "";
+  const text = formData.get("text")?.toString() ?? "";
+  const type = formData.get("type")?.toString() ?? "";
+  const coverPhotoName = formData.get("coverPhotoName")?.toString() ?? "";
+  const orderRaw = formData.get("order")?.toString();
+  const parsedOrder = orderRaw ? Number(orderRaw) : undefined;
 
   const result = editArticleSchema.safeParse({
-    id: formData.get("id"),
-    header: formData.get("header"),
-    coverPhotoName: formData.get("coverPhotoName"),
-    text: formData.get("text"),
+    id,
+    header,
+    coverPhotoName,
+    text,
+    type,
     order: parsedOrder,
   });
-
-  // console.log(result.error);
 
   if (!result.success) {
     return {
       errors: result.error.flatten().fieldErrors,
     };
   }
-
-  // console.log(result);
 
   try {
     await db.article.update({
@@ -53,6 +56,7 @@ export async function editArticle(
         header: result.data.header,
         coverPhotoName: result.data.coverPhotoName,
         htmlText: result.data.text,
+        type: result.data.type,
         order: parsedOrder,
       },
     });

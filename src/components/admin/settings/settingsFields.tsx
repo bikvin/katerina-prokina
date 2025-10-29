@@ -18,6 +18,9 @@ export type settingsType = {
   footerText: string;
   notificationEmails: string;
   allowedTelegramAccounts: string;
+  articlesPageHeader: string;
+  articlesPageSubheaderArticles: string;
+  articlesPageSubheaderMovieReviews: string;
 };
 
 export const settingsFieldsWithDividers = [
@@ -125,6 +128,16 @@ export const settingsFieldsWithDividers = [
   {
     name: "articlesPageHeader",
     label: "Заголовок страницы статей",
+    validation: "required",
+  },
+  {
+    name: "articlesPageSubheaderArticles",
+    label: "Подзаголовок статьи",
+    validation: "required",
+  },
+  {
+    name: "articlesPageSubheaderMovieReviews",
+    label: "Подзаголовок обзоры фильмов",
     validation: "required",
   },
 ];

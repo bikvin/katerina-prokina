@@ -7,6 +7,15 @@ import { editArticle } from "@/actions/articles/edit";
 import { RichTextEditorImages } from "@/components/common/richTextEditor/RichTextEditorImages";
 import DropzoneInputSingleImage from "../../images/dropzone/dropzoneInputSingleImage";
 import { ImageObj } from "../../images/edit/ImageObjInterface";
+import { ArticleTypeEnum } from "@prisma/client";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function CreateEditArticleForm({
   header,
@@ -14,6 +23,7 @@ export default function CreateEditArticleForm({
   htmlText,
   id,
   order,
+  type,
   isEdit = false,
   imageGroup,
 }: {
@@ -21,6 +31,7 @@ export default function CreateEditArticleForm({
   imageData?: ImageObj | null;
   htmlText?: string;
   id?: string;
+  type?: ArticleTypeEnum;
   order?: number | null;
   isEdit?: boolean;
   imageGroup: string;
@@ -36,6 +47,10 @@ export default function CreateEditArticleForm({
   const startingText = isEdit && htmlText ? htmlText : ""; // if we have text set starting text to it
 
   const [editorValue, setEditorValue] = useState<string>(startingText);
+
+  const [articleType, setArticleType] = useState<ArticleTypeEnum>(
+    isEdit && type ? type : ArticleTypeEnum.ARTICLE
+  );
 
   return (
     <form className={`admin-form`} action={action}>
@@ -75,6 +90,33 @@ export default function CreateEditArticleForm({
         )}
       </div>
       <div className="mt-8">
+        <label htmlFor="type">Тип статьи:</label>
+
+        <Select
+          value={articleType}
+          onValueChange={(val: ArticleTypeEnum) => setArticleType(val)}
+        >
+          <SelectTrigger className="w-[180px] text-xl">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem className="text-xl" value="ARTICLE">
+                Обычная статья
+              </SelectItem>
+              <SelectItem className="text-xl" value="MOVIE_REVIEW">
+                Обзор фильма
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
+        {formState.errors && (
+          <div className="error">{formState.errors?.type?.join(", ")}</div>
+        )}
+      </div>
+
+      <div className="mt-8">
         <label htmlFor="order">Порядок показа:</label>
         <div className="w-16">
           <input
@@ -103,6 +145,8 @@ export default function CreateEditArticleForm({
         value={photoName ? JSON.stringify(photoName) : ""}
       />
       {isEdit && <input type="hidden" name="id" value={id} />}
+
+      <input type="hidden" name="type" value={articleType} />
     </form>
   );
 }

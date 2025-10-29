@@ -18,8 +18,6 @@ export default async function EditArticlePage({
 
   const coverImageData = JSON.parse(item.coverPhotoName) || null;
 
-  console.log("IMAGE_GROUP", IMAGE_GROUP);
-
   return (
     <>
       <TopMenu />
@@ -31,6 +29,7 @@ export default async function EditArticlePage({
             imageData={coverImageData}
             htmlText={item.htmlText}
             id={item.id}
+            type={item.type}
             order={item.order}
             isEdit={true}
             imageGroup={IMAGE_GROUP}

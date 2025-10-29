@@ -1,24 +1,21 @@
 // import classes from "./accordionItemsEdit.module.css";
-import { db } from "@/db";
 import ArticlesItem from "./ArticlesItem";
+import { Article } from "@prisma/client";
 
-export default async function ArticlesEditList() {
-  const itemsData = await db.article.findMany({
-    orderBy: [
-      { order: "asc" }, // Primary sort by 'order' column
-      { createdAt: "desc" }, // Secondary sort by 'createdAt' column
-    ],
-  });
-
+export default async function ArticlesEditList({
+  items,
+}: {
+  items: Article[];
+}) {
   return (
     <>
-      {itemsData.length === 0 && (
-        <div className="text-center text-xl mt-10 font-light tracking-widest">
-          Статей пока нет
+      {items.length === 0 && (
+        <div className="text-center text-xl mt-10 mb-4 font-light tracking-widest">
+          Тут ничего пока нет
         </div>
       )}
-      <div className={`mt-10`}>
-        {itemsData.map((item) => (
+      <div className={``}>
+        {items.map((item) => (
           <ArticlesItem key={item.id} article={item} />
         ))}
       </div>

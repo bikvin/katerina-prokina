@@ -7,14 +7,17 @@ import { motion } from "framer-motion";
 
 export default function ArticleList({
   articleData,
+  header,
 }: {
   articleData: Article[];
+  header: string;
 }) {
   return (
     <section className="pb-16 md:pb-20 md:pt-10 px-8 md:px-10  overflow-x-hidden max-w-screen-lg mx-auto flex flex-col">
+      <h2 className="text-4xl font-bold mb-10">{header}</h2>
       {articleData.length === 0 && (
         <div className="text-center text-xl  font-light tracking-widest">
-          Статей пока нет
+          Тут пока ничего нет
         </div>
       )}
 
